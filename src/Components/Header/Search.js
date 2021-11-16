@@ -1,6 +1,23 @@
 import React from 'react'
-import { Image, Linking, Text, TouchableHighlight, View, TextInput, StyleSheet } from 'react-native'
+import { Image, Text, TouchableHighlight, View, TextInput, StyleSheet } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import { colors } from '../../../constants'
+
+function AddonToSeach() {
+    return (
+
+        <View style={stylesCreated.searchSection}>
+            <Icon style={stylesCreated.searchIcon} name="ios-search" size={20} color="#000" />
+            <TextInput
+                style={stylesCreated.input}
+                placeholder='Поиск по приложению'
+                placeholderTextColor='#FFFBFB'
+
+                underlineColorAndroid="transparent"
+            />
+        </View>
+    );
+}
 
 const Search = () => {
 
@@ -55,6 +72,7 @@ const Search = () => {
 
 const stylesCreated = StyleSheet.create({
     input: {
+        flex: 1,
         height: 40,
         width: '70%',
         marginRight: 30,
@@ -63,6 +81,16 @@ const stylesCreated = StyleSheet.create({
         backgroundColor: colors.LIGHT_GREEN,
         borderRadius: 10,
         fontWeight: '700',
+    },
+    searchSection: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+    },
+    searchIcon: {
+        padding: 10,
     },
 })
 

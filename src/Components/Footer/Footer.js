@@ -5,6 +5,7 @@ const Footer = () => {
     return (
         <View
             style={{
+                flex: 0.1,
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 marginTop: 80,

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image, Text, TouchableHighlight, View, TextInput, StyleSheet, FlatList, Dimensions } from 'react-native'
 import { ScrollView } from 'react-native-web';
-import { colors } from '../../../constants'
+import { colors } from '../../../../constants'
 
 const PurchaseHistory = () => {
     const data = [
@@ -32,10 +32,15 @@ const PurchaseHistory = () => {
 
             elevation: 14,
         },
-        item: {
+        shop: {
             flex: 1,
-            margin: 3,
-            backgroundColor: 'lightblue',
+            fontWeight: '700',
+            fontSize: 18
+        },
+        shopCategory: {
+            flex: 1,
+            fontSize: 16,
+            color: colors.TEXT_GRAY
         },
         text: {
             fontWeight: '700',
@@ -51,16 +56,18 @@ const PurchaseHistory = () => {
                     <View style={styles.itemContainer}>
                         <View style={{
                             flexDirection: 'row', alignItems: 'center',
-                            justifyContent: 'space-between',
+                            justifyContent: 'space-between', marginBottom: 10,
                         }}>
                             <Text style={styles.text}>Сегодня</Text>
-                            <Text style={styles.text}>Итого: 400 Р</Text>
+                            <Text style={styles.text}>Итого: 400 ₽</Text>
                         </View>
                         <View style={{
                             flexDirection: 'row',
                             marginBottom: 24,
                             marginTop: 15,
                             justifyContent: 'space-between',
+                            borderBottomColor: colors.LINE,
+                            borderBottomWidth: 2,
                         }}>
                             <View style={{
                                 width: 45,
@@ -73,16 +80,18 @@ const PurchaseHistory = () => {
                                 flexDirection: 'column',
 
                             }}>
-                                <Text style={styles.item}>Ярче</Text>
-                                <Text style={styles.item}>Продукты питания</Text>
+                                <Text style={styles.shop}>Ярче</Text>
+                                <Text style={styles.shopCategory}>Продукты питания</Text>
                             </View>
                             <View>
-                                <Text style={{ marginLeft: 100 }}>200 Р</Text>
+                                <Text style={{ marginLeft: 80, fontWeight: '700', fontSize: 20 }}>200 ₽</Text>
                             </View>
                         </View>
                         <View style={{
                             flexDirection: 'row',
                             justifyContent: 'space-between',
+                            borderBottomColor: colors.LINE,
+                            borderBottomWidth: 2,
                         }}>
                             <View style={{
                                 width: 45,
@@ -95,11 +104,11 @@ const PurchaseHistory = () => {
                                 flexDirection: 'column',
 
                             }}>
-                                <Text style={styles.item}>Ярче</Text>
-                                <Text style={styles.item}>Продукты питания</Text>
+                                <Text style={styles.shop}>Ярче</Text>
+                                <Text style={styles.shopCategory}>Продукты питания</Text>
                             </View>
                             <View>
-                                <Text style={{ marginLeft: 100 }}>200 Р</Text>
+                                <Text style={{ marginLeft: 80, fontWeight: '700', fontSize: 20 }}>200 ₽</Text>
                             </View>
                         </View>
 

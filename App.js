@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { colors } from './constants';
 import Footer from './src/Components/Footer/Footer';
 import Header from './src/Components/Header/Header';
-import PurchaseHistory from './src/Components/Purchase history/PurchaseHistory';
+import PurchaseHistory from './src/Components/Pages/Purchase history/PurchaseHistory';
 import { NavigationContainer } from '@react-navigation/native';
 import MyTabs from './src/Navigation/Navigation';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -17,16 +17,13 @@ export default function App() {
       <View
         style={{
           padding: 24,
-          paddingTop: 55,
-          paddingBottom: 30,
+          paddingTop: 25,
+          paddingBottom: 25,
           backgroundColor: colors.MAIN_GREEN,
         }}
       >
         <Header />
       </View>
-      {/* <View style={{ backgroundColor: '#C4C4C4' }}>
-        <PurchaseHistory />
-      </View> */}
       <MyTabs />
     </NavigationContainer>
   );
