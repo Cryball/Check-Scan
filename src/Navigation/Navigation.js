@@ -6,6 +6,7 @@ import PurchaseHistory from '../Components/Pages/Purchase history/PurchaseHistor
 import PhotoPage from '../Components/Pages/PhotoPage/PhotoPage';
 import { colors } from '../../constants';
 import { View, Text, Image, TouchableHighlight } from 'react-native'
+import AutorizPage from '../Components/Pages/AutorizPage/AutorizPage';
 
 const Tab = createBottomTabNavigator();
 
@@ -36,22 +37,6 @@ const MyTabs = () => {
                 }
             }}
         >
-            <Tab.Screen name="Photo" component={PhotoPage} options={{
-                tabBarIcon: ({ focused }) => (
-                    <View style={{ alignItems: 'center', justifyContent: 'center', }}>
-                        <Image
-                            source={require('../images/plus.png')}
-                            resizeMode='contain'
-                            style={{
-                                width: 25,
-                                height: 25,
-                                tintColor: focused ? colors.MAIN_GREEN : '#748c94'
-                            }}
-                        />
-                        <Text style={{ color: focused ? colors.MAIN_GREEN : '#748c94', fontSize: 10 }}>Новый чек</Text>
-                    </View>
-                ),
-            }} />
             <Tab.Screen name="Purchase" component={PurchaseHistory} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: 'center', justifyContent: 'center', }}>
@@ -65,6 +50,22 @@ const MyTabs = () => {
                             }}
                         />
                         <Text style={{ color: focused ? colors.MAIN_GREEN : '#748c94', fontSize: 10 }}>История покупок</Text>
+                    </View>
+                ),
+            }} />
+            <Tab.Screen name="Photo" component={PhotoPage} options={{
+                tabBarIcon: ({ focused }) => (
+                    <View style={{ alignItems: 'center', justifyContent: 'center', }}>
+                        <Image
+                            source={require('../images/plus.png')}
+                            resizeMode='contain'
+                            style={{
+                                width: 25,
+                                height: 25,
+                                tintColor: focused ? colors.MAIN_GREEN : '#748c94'
+                            }}
+                        />
+                        <Text style={{ color: focused ? colors.MAIN_GREEN : '#748c94', fontSize: 10 }}>Новый чек</Text>
                     </View>
                 ),
             }} />

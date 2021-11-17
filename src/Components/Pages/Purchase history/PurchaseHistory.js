@@ -1,58 +1,27 @@
 import React from 'react'
-import { Image, Text, TouchableHighlight, View, TextInput, StyleSheet, FlatList, Dimensions } from 'react-native'
-import { ScrollView } from 'react-native-web';
+import { TouchableOpacity, Text, TouchableHighlight, View, TextInput, StyleSheet, FlatList, Dimensions } from 'react-native'
 import { colors } from '../../../../constants'
+import { LinearGradient } from 'expo-linear-gradient';
+import Header from '../../Header/Header';
 
 const PurchaseHistory = () => {
     const data = [
-        { id: 'a', value: 'A' },
-        { id: 'b', value: 'B' },
-        { id: 'c', value: 'A' },
-        { id: 'd', value: 'B' },
-        { id: 'e', value: 'A' },
-        { id: 'f', value: 'B' },
+        { id: 1, value: 'A' },
+        { id: 2, value: 'B' },
+        { id: 3, value: 'A' },
+        { id: 4, value: 'A' },
+        // { id: '5', value: 'A' },
+        // { id: '6', value: 'A' },
     ];
-    const numColumns = 1;
-    const size = Dimensions.get('window').width / numColumns;
-    const styles = StyleSheet.create({
-        itemContainer: {
-            width: '100%',
-            height: size,
-            borderRadius: 10,
-            backgroundColor: colors.MAIN_WHITE,
-            padding: 24,
-            marginBottom: 15,
-            shadowColor: "#000",
-            shadowOffset: {
-                width: 0,
-                height: 7,
-            },
-            shadowOpacity: 0.41,
-            shadowRadius: 9.11,
 
-            elevation: 14,
-        },
-        shop: {
-            flex: 1,
-            fontWeight: '700',
-            fontSize: 18
-        },
-        shopCategory: {
-            flex: 1,
-            fontSize: 16,
-            color: colors.TEXT_GRAY
-        },
-        text: {
-            fontWeight: '700',
-            fontSize: 20,
-        },
-    });
+    const numColumns = 1;
+    //const size = Dimensions.get('window').width / numColumns;
 
     function Grid(props) {
         return (
             <FlatList
                 data={data}
-                renderItem={({ item }) => (
+                renderItem={(item) => (
                     <View style={styles.itemContainer}>
                         <View style={{
                             flexDirection: 'row', alignItems: 'center',
@@ -114,22 +83,52 @@ const PurchaseHistory = () => {
 
                     </View>
                 )}
-                keyExtractor={item => item.id}
+                keyExtractor={item => item.id.toString()}
                 numColumns={numColumns} />
         );
     }
 
     return (
-        <View style={{
-            flexDirection: 'column',
-            marginBottom: 10,
-        }}>
-            <View>
-                <Grid />
-            </View>
-        </View >
+        <View>
+            <Header />
+            <Grid />
+        </View>
 
     )
 }
+
+const styles = StyleSheet.create({
+    itemContainer: {
+        width: '100%',
+        height: 'auto',
+        borderRadius: 10,
+        backgroundColor: colors.MAIN_WHITE,
+        padding: 24,
+        marginBottom: 15,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 7,
+        },
+        shadowOpacity: 0.41,
+        shadowRadius: 9.11,
+
+        elevation: 14,
+    },
+    shop: {
+        flex: 1,
+        fontWeight: '700',
+        fontSize: 18
+    },
+    shopCategory: {
+        flex: 1,
+        fontSize: 16,
+        color: colors.TEXT_GRAY,
+    },
+    text: {
+        fontWeight: '700',
+        fontSize: 20,
+    },
+});
 
 export default PurchaseHistory
