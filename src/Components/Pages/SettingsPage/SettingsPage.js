@@ -1,7 +1,9 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { View, Text, Image, TouchableHighlight, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableHighlight, TouchableOpacity, StyleSheet } from 'react-native'
+import { colors } from '../../../../constants'
 import { auth } from '../../../../firebase'
+import SettingsHeader from './SettingsHeader'
 
 const SettingsPage = () => {
     const navigation = useNavigation()
@@ -16,15 +18,34 @@ const SettingsPage = () => {
     }
     return (
         <View>
-            <Text>It is a settings page 123</Text>
+            <SettingsHeader />
+            <Text>It is a settings page</Text>
             <TouchableOpacity
                 onPress={handleSignOut}
-                style={{ fontSize: 40, color: 'blue' }}
+                style={styles.button}
             >
-                <Text>Sign out</Text>
+                <Text style={styles.buttonText}>Sign out</Text>
             </TouchableOpacity>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    button: {
+        backgroundColor: '#F6F0F0',
+        padding: 10,
+        borderRadius: 10,
+        alignItems: 'center',
+        borderColor: colors.MAIN_GREEN,
+        borderWidth: 3,
+        marginBottom: 10,
+        width: '55%'
+    },
+    buttonText: {
+        color: colors.TEXT_GRAY,
+        fontWeight: '700',
+        fontSize: 16,
+    },
+})
 
 export default SettingsPage

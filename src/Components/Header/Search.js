@@ -52,19 +52,6 @@ const Search = () => {
                     </TouchableHighlight>
                 </View>
             </View>
-            <View style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginTop: 10,
-            }}>
-                <Text style={{ color: 'white', fontSize: 24, fontWeight: '700', }}>История покупок</Text>
-                <TouchableHighlight>
-                    <Text style={{ color: '#F4E2E2', fontSize: 17, fontWeight: '500', }}>Календарь</Text>
-                </TouchableHighlight>
-
-
-            </View>
         </View>
 
     )
