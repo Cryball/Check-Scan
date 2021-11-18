@@ -6,7 +6,6 @@ import PurchaseHistory from '../Components/Pages/Purchase history/PurchaseHistor
 import PhotoPage from '../Components/Pages/PhotoPage/PhotoPage';
 import { colors } from '../../constants';
 import { View, Text, Image, TouchableHighlight } from 'react-native'
-import AutorizPage from '../Components/Pages/AutorizPage/AutorizPage';
 
 const Tab = createBottomTabNavigator();
 

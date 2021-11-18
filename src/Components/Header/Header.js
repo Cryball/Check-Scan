@@ -6,6 +6,7 @@ import FilterCategory from './FilterCategory'
 import Search from './Search'
 import { useNavigation } from '@react-navigation/native'
 import { LinearGradient } from 'expo-linear-gradient';
+import { useTranslation } from '../../Localization/Translations'
 
 const Meeting = () => {
     const userName = auth.currentUser?.email
@@ -26,7 +27,7 @@ const Meeting = () => {
 }
 
 const Header = () => {
-
+    const { hello } = useTranslation()
     return (
         <LinearGradient colors={[colors.MAIN_GREEN, '#68BA8E',]}>
             <View style={{
@@ -76,7 +77,7 @@ const Header = () => {
                 }}>
                     <Text style={{ color: 'white', fontSize: 24, fontWeight: '700', }}>История покупок</Text>
                     <TouchableHighlight>
-                        <Text style={{ color: '#F4E2E2', fontSize: 17, fontWeight: '500', }}>Календарь</Text>
+                        <Text style={{ color: '#F4E2E2', fontSize: 17, fontWeight: '500', }}>{hello} </Text>
                     </TouchableHighlight>
 
 

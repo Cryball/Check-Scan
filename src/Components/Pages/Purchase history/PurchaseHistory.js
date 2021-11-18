@@ -3,6 +3,7 @@ import { TouchableOpacity, Text, TouchableHighlight, View, TextInput, StyleSheet
 import { colors } from '../../../../constants'
 import { LinearGradient } from 'expo-linear-gradient';
 import Header from '../../Header/Header';
+import { IntlProvider } from 'react-intl'
 
 const PurchaseHistory = () => {
     const data = [
@@ -128,8 +129,6 @@ const PurchaseHistory = () => {
             <Header />
             <Grid data={data} />
         </View>
-
-
     )
 }
 
