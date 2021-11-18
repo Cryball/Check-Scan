@@ -30,6 +30,7 @@ const FilterCategory = () => {
                 renderItem={({ item, index }) => {
                     return <Slide data={item} key={index} />;
                 }}
+                keyExtractor={(item, index) => index.toString()}
                 horizontal
                 showsHorizontalScrollIndicator={false}
             />
