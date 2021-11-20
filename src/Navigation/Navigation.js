@@ -6,10 +6,12 @@ import PurchaseHistory from '../Components/Pages/Purchase history/PurchaseHistor
 import PhotoPage from '../Components/Pages/PhotoPage/PhotoPage';
 import { colors } from '../../constants';
 import { View, Text, Image, TouchableHighlight } from 'react-native'
+import { useTranslation } from '../Localization/Translations';
 
 const Tab = createBottomTabNavigator();
 
 const MyTabs = () => {
+    const { purchaseHistory, newReceipt, costAnalysis, settings } = useTranslation()
     return (
         <Tab.Navigator
             screenOptions={{
@@ -48,7 +50,7 @@ const MyTabs = () => {
                                 tintColor: focused ? colors.MAIN_GREEN : '#748c94'
                             }}
                         />
-                        <Text style={{ color: focused ? colors.MAIN_GREEN : '#748c94', fontSize: 10 }}>История покупок</Text>
+                        <Text style={{ color: focused ? colors.MAIN_GREEN : '#748c94', fontSize: 10 }}>{purchaseHistory}</Text>
                     </View>
                 ),
             }} />
@@ -64,7 +66,7 @@ const MyTabs = () => {
                                 tintColor: focused ? colors.MAIN_GREEN : '#748c94'
                             }}
                         />
-                        <Text style={{ color: focused ? colors.MAIN_GREEN : '#748c94', fontSize: 10 }}>Новый чек</Text>
+                        <Text style={{ color: focused ? colors.MAIN_GREEN : '#748c94', fontSize: 10 }}>{newReceipt}</Text>
                     </View>
                 ),
             }} />
@@ -80,7 +82,7 @@ const MyTabs = () => {
                                 tintColor: focused ? colors.MAIN_GREEN : '#748c94'
                             }}
                         />
-                        <Text style={{ color: focused ? colors.MAIN_GREEN : '#748c94', fontSize: 10 }}>Анализ затрат</Text>
+                        <Text style={{ color: focused ? colors.MAIN_GREEN : '#748c94', fontSize: 10 }}>{costAnalysis}</Text>
                     </View>
                 ),
             }} />
@@ -96,7 +98,7 @@ const MyTabs = () => {
                                 tintColor: focused ? colors.MAIN_GREEN : '#748c94'
                             }}
                         />
-                        <Text style={{ color: focused ? colors.MAIN_GREEN : '#748c94', fontSize: 10 }}>Настройки</Text>
+                        <Text style={{ color: focused ? colors.MAIN_GREEN : '#748c94', fontSize: 10 }}>{settings}</Text>
                     </View>
                 ),
             }} />

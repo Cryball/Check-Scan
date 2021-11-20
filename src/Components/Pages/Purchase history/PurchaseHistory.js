@@ -1,9 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, Text, TouchableHighlight, View, TextInput, StyleSheet, FlatList, Dimensions } from 'react-native'
 import { colors } from '../../../../constants'
-import { LinearGradient } from 'expo-linear-gradient';
 import Header from '../../Header/Header';
-import { IntlProvider } from 'react-intl'
 
 const PurchaseHistory = () => {
     const data = [

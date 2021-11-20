@@ -1,15 +1,16 @@
 import { useNavigation } from '@react-navigation/native'
 import React, { useState, useContext } from 'react'
 import { View, Text, Image, TouchableHighlight, TouchableOpacity, StyleSheet, FlatList } from 'react-native'
-import { ListItem } from 'react-native-elements';
 import { colors } from '../../../../constants'
 import { auth } from '../../../../firebase'
-import { LanguageContext } from '../../../Localization/Translations';
+import { LanguageContext, useTranslation } from '../../../Localization/Translations';
 import SettingsHeader from './SettingsHeader'
+import { LinearGradient } from 'expo-linear-gradient'
 
 const langs = ['en', 'ru'];
 
 const SettingsPage = () => {
+    const { changeLang, signOut } = useTranslation()
     const {
         setAppLanguage,
     } = useContext(LanguageContext);
@@ -25,37 +26,41 @@ const SettingsPage = () => {
     }
     //console.log(lang, "chosen lang")
     return (
-        <View>
-            <SettingsHeader />
-            <Text>It is a settings page</Text>
-            <View>
-                <Text style={styles.language}>
-                    Change Language
-                </Text>
+        <LinearGradient colors={[colors.MAIN_GREEN, '#68BA8E',]} style={{ flex: 1 }}>
+            <View style={{
+                padding: 24,
+                paddingTop: 30,
+                paddingBottom: 25,
+            }}>
+                <SettingsHeader />
+                <View style={{ paddingTop: 20 }}>
+                    <Text style={styles.language}>
+                        {changeLang}
+                    </Text>
 
-                <FlatList
-                    data={langs}
-                    renderItem={(item) => {
-                        //console.log(item.item)
-                        return (
-                            <TouchableOpacity onPress={() => {
-                                setAppLanguage(item.item);
-                            }}>
-                                <Text>{item.item}</Text>
-                            </TouchableOpacity>
-                        )
-                    }}
-                    keyExtractor={(item, index) => index.toString()}
-                />
+                    <FlatList
+                        data={langs}
+                        renderItem={(item) => {
+                            return (
+                                <TouchableOpacity onPress={() => {
+                                    setAppLanguage(item.item);
+                                }}>
+                                    <Text style={styles.text}>{item.item}</Text>
+                                </TouchableOpacity>
+                            )
+                        }}
+                        keyExtractor={(item, index) => index.toString()}
+                    />
 
+                </View>
+                <TouchableOpacity
+                    onPress={handleSignOut}
+                    style={styles.button}
+                >
+                    <Text style={styles.buttonText}>{signOut}</Text>
+                </TouchableOpacity>
             </View>
-            <TouchableOpacity
-                onPress={handleSignOut}
-                style={styles.button}
-            >
-                <Text style={styles.buttonText}>Sign out</Text>
-            </TouchableOpacity>
-        </View>
+        </LinearGradient>
     )
 }
 
@@ -77,8 +82,14 @@ const styles = StyleSheet.create({
     },
     language: {
         paddingTop: 10,
-        textAlign: 'center',
+        color: 'white',
+        fontSize: 20,
+        fontWeight: '700'
+        // textAlign: 'center',
     },
+    text: {
+        color: "white"
+    }
 })
 
 export default SettingsPage

@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { createContext, useState, useEffect, useContext } from 'react';
 //import * as RNLocalize from 'react-native-localize'; // 3
 import en from './langs/en.json'

@@ -4,17 +4,13 @@ import { useNavigation } from '@react-navigation/native'
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../../../constants'
 import Search from '../../Header/Search';
+import { useTranslation } from '../../../Localization/Translations';
 
 const SettingsHeader = () => {
-
+    const { settings } = useTranslation()
     return (
         <LinearGradient colors={[colors.MAIN_GREEN, '#68BA8E',]}>
-            <View style={{
-                padding: 24,
-                paddingTop: 25,
-                paddingBottom: 25,
-                //backgroundColor: colors.MAIN_GREEN,
-            }}>
+            <View >
                 <Search />
                 <View style={{
                     flexDirection: 'row',
@@ -22,7 +18,7 @@ const SettingsHeader = () => {
                     alignItems: 'center',
                     marginTop: 10,
                 }}>
-                    <Text style={{ color: 'white', fontSize: 24, fontWeight: '700', }}>Настройки</Text>
+                    <Text style={{ color: 'white', fontSize: 24, fontWeight: '700', }}>{settings}</Text>
                 </View>
             </View>
         </LinearGradient>

@@ -1,3 +1,20 @@
 {
-  "hello": "Привет"
+  "hello": "Привет",
+  "purchaseHistory": "История покупок",
+  "newReceipt": "Новый чек",
+  "costAnalysis": "Анализ затрат",
+  "settings": "Настройки",
+  "goodMorning": "Доброе утро",
+  "goodAfternoon": "Добрый день",
+  "goodEvening": "Добрый вечер",
+  "goodNight": "Доброй ночи",
+  "calendar": "Календарь",
+  "searchByApp": "Поиск по приложению",
+  "changeLang": "Изменить язык",
+  "signOut": "Выйти",
+  "signIn": "Войти",
+  "register": "Зарегистрироваться",
+  "meet": "Перед тем как продолжить, войдите в приложение или зарегистрируйтесь",
+  "emailText": "Электронная почта",
+  "passwordText": "Пароль"
 }

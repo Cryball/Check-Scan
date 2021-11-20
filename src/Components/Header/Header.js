@@ -4,35 +4,36 @@ import { colors } from '../../../constants'
 import { auth } from '../../../firebase'
 import FilterCategory from './FilterCategory'
 import Search from './Search'
-import { useNavigation } from '@react-navigation/native'
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTranslation } from '../../Localization/Translations'
 
-const Meeting = () => {
-    const userName = auth.currentUser?.email
-    const date = new Date()
-    const currHour = date.getHours()
-    if ((currHour >= 6) & (currHour <= 12)) {
-        return <Text style={stylesCreated.meeting}>Доброе утро, {userName}!</Text>
-    }
-    else if ((currHour >= 13) & (currHour <= 17)) {
-        return <Text style={stylesCreated.meeting}>Добрый день, {userName}!</Text>
-    }
-    else if ((currHour >= 18) & (currHour <= 22)) {
-        return <Text style={stylesCreated.meeting}>Добрый вечер, {userName}!</Text>
-    }
-    else {
-        return <Text style={stylesCreated.meeting}>Доброй ночи, {userName}!</Text>
-    }
-}
-
 const Header = () => {
-    const { hello } = useTranslation()
+    const { goodMorning, goodAfternoon, goodEvening, goodNight, calendar, purchaseHistory } = useTranslation()
+
+    const Meeting = () => {
+        const userName = auth.currentUser?.email
+        const date = new Date()
+        const currHour = date.getHours()
+        if ((currHour >= 6) & (currHour <= 12)) {
+            return <Text style={stylesCreated.meeting}>{goodMorning}, {userName}!</Text>
+        }
+        else if ((currHour >= 13) & (currHour <= 17)) {
+            return <Text style={stylesCreated.meeting}>{goodAfternoon}, {userName}!</Text>
+        }
+        else if ((currHour >= 18) & (currHour <= 22)) {
+            return <Text style={stylesCreated.meeting}>{goodEvening}, {userName}!</Text>
+        }
+        else {
+            return <Text style={stylesCreated.meeting}>{goodNight}, {userName}!</Text>
+        }
+    }
+
+
     return (
         <LinearGradient colors={[colors.MAIN_GREEN, '#68BA8E',]}>
             <View style={{
                 padding: 24,
-                paddingTop: 25,
+                paddingTop: 30,
                 paddingBottom: 25,
                 //backgroundColor: colors.MAIN_GREEN,
             }}>
@@ -55,7 +56,7 @@ const Header = () => {
                         <TouchableHighlight>
                             <Image
                                 source={
-                                    require('./right-arrow.png')
+                                    require('../../images/right-arrow.png')
                                 }
                                 style={{
                                     width: 14,
@@ -75,9 +76,9 @@ const Header = () => {
                     alignItems: 'center',
                     marginTop: 10,
                 }}>
-                    <Text style={{ color: 'white', fontSize: 24, fontWeight: '700', }}>История покупок</Text>
+                    <Text style={{ color: 'white', fontSize: 24, fontWeight: '700', }}>{purchaseHistory}</Text>
                     <TouchableHighlight>
-                        <Text style={{ color: '#F4E2E2', fontSize: 17, fontWeight: '500', }}>{hello} </Text>
+                        <Text style={{ color: '#F4E2E2', fontSize: 17, fontWeight: '500', }}>{calendar} </Text>
                     </TouchableHighlight>
 
 

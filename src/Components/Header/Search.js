@@ -2,6 +2,7 @@ import React from 'react'
 import { Image, Text, TouchableHighlight, View, TextInput, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { colors } from '../../../constants'
+import { useTranslation } from '../../Localization/Translations';
 
 function AddonToSeach() {
     return (
@@ -20,7 +21,7 @@ function AddonToSeach() {
 }
 
 const Search = () => {
-
+    const { searchByApp } = useTranslation()
     return (
         <View>
             <View style={{
@@ -30,7 +31,7 @@ const Search = () => {
             }}>
                 <TextInput
                     style={stylesCreated.input}
-                    placeholder='Поиск по приложению'
+                    placeholder={searchByApp}
                     placeholderTextColor='#FFFBFB' />
                 <View style={{
                     width: 45,

@@ -4,8 +4,10 @@ import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, Vi
 import { auth } from '../../../../firebase'
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../../../constants';
+import { useTranslation } from '../../../Localization/Translations';
 
 const AutorizPage = () => {
+    const { emailText, passwordText, register, signIn, meet } = useTranslation()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -44,16 +46,16 @@ const AutorizPage = () => {
     return (
         <LinearGradient colors={[colors.MAIN_GREEN, '#68BA8E',]} style={styles.container}>
             <View style={styles.inputContainer}>
-                <Text style={styles.text}>Прежде чем продолжить, войдите в приложение</Text>
+                <Text style={styles.text}>{meet}</Text>
                 <TextInput
-                    placeholder="Электронная почта"
+                    placeholder={emailText}
                     value={email}
                     onChangeText={text => setEmail(text)}
                     style={styles.input}
                     placeholderTextColor='#FFFBFB'
                 />
                 <TextInput
-                    placeholder="Пароль"
+                    placeholder={passwordText}
                     value={password}
                     onChangeText={text => setPassword(text)}
                     style={styles.input}
@@ -67,13 +69,13 @@ const AutorizPage = () => {
                     onPress={handleLogin}
                     style={styles.button}
                 >
-                    <Text style={styles.buttonText}>Войти</Text>
+                    <Text style={styles.buttonText}>{signIn}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={handleSignUp}
                     style={styles.button}
                 >
-                    <Text style={styles.buttonText}>Зарегистрироваться</Text>
+                    <Text style={styles.buttonText}>{register}</Text>
                 </TouchableOpacity>
             </View>
         </LinearGradient>

@@ -1,4 +1,21 @@
 {
   "hello": "hello",
-  "meeting": "meeting"
+  "meeting": "meeting",
+  "purchaseHistory": "Purchase history",
+  "newReceipt": "New receipt",
+  "costAnalysis": "Cost analysis",
+  "settings": "Settings",
+  "goodMorning": "Good morning",
+  "goodAfternoon": "Good afternoon",
+  "goodEvening": "Good evening",
+  "goodNight": "Good night",
+  "calendar": "Calendar",
+  "searchByApp": "Search by application",
+  "changeLang": "Change language",
+  "signOut": "Sign out",
+  "signIn": "Sign in",
+  "register": "Register",
+  "meet": "Please login to the app or register before proceeding",
+  "emailText": "Email",
+  "passwordText": "Password"
 }
