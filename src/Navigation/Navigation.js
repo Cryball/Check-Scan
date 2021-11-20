@@ -11,7 +11,7 @@ import { useTranslation } from '../Localization/Translations';
 const Tab = createBottomTabNavigator();
 
 const MyTabs = () => {
-    const { purchaseHistory, newReceipt, costAnalysis, settings } = useTranslation()
+    const { purchaseHistory, newReceipt, costAnalysis, profile } = useTranslation()
     return (
         <Tab.Navigator
             screenOptions={{
@@ -98,7 +98,7 @@ const MyTabs = () => {
                                 tintColor: focused ? colors.MAIN_GREEN : '#748c94'
                             }}
                         />
-                        <Text style={{ color: focused ? colors.MAIN_GREEN : '#748c94', fontSize: 10 }}>{settings}</Text>
+                        <Text style={{ color: focused ? colors.MAIN_GREEN : '#748c94', fontSize: 10 }}>{profile}</Text>
                     </View>
                 ),
             }} />

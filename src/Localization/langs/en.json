@@ -17,5 +17,7 @@
   "register": "Register",
   "meet": "Please login to the app or register before proceeding",
   "emailText": "Email",
-  "passwordText": "Password"
+  "passwordText": "Password",
+  "profile": "Profile",
+  "lang": "Language"
 }

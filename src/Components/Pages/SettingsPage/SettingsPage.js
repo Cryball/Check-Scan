@@ -1,19 +1,26 @@
 import { useNavigation } from '@react-navigation/native'
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useRef } from 'react'
 import { View, Text, Image, TouchableHighlight, TouchableOpacity, StyleSheet, FlatList } from 'react-native'
 import { colors } from '../../../../constants'
 import { auth } from '../../../../firebase'
 import { LanguageContext, useTranslation } from '../../../Localization/Translations';
 import SettingsHeader from './SettingsHeader'
-import { LinearGradient } from 'expo-linear-gradient'
-
-const langs = ['en', 'ru'];
+import Options from './Options'
 
 const SettingsPage = () => {
-    const { changeLang, signOut } = useTranslation()
+    const { lang, signOut } = useTranslation()
+    const [chosenTheme, setchosenTheme] = useState('Default')
+    const [chosenCurrency, setchosenCurrency] = useState('₽')
+
     const {
         setAppLanguage,
+        appLanguage
     } = useContext(LanguageContext);
+
+    const langs = ['Russian', 'English', 'Cancel']
+    const themes = ['Default', 'Dark', 'Cancel']
+    const currency = ['₽', '$', '₴', 'Cancel']
+
     const navigation = useNavigation()
 
     const handleSignOut = () => {
@@ -24,55 +31,38 @@ const SettingsPage = () => {
             })
             .catch(error => alert(error.message))
     }
-    //console.log(lang, "chosen lang")
+
     return (
-        <LinearGradient colors={[colors.MAIN_GREEN, '#68BA8E',]} style={{ flex: 1 }}>
-            <View style={{
-                padding: 24,
-                paddingTop: 30,
-                paddingBottom: 25,
-            }}>
-                <SettingsHeader />
-                <View style={{ paddingTop: 20 }}>
-                    <Text style={styles.language}>
-                        {changeLang}
-                    </Text>
+        <View style={{ backgroundColor: 'white', flex: 1 }}>
+            <SettingsHeader />
+            <Text style={styles.optionsName}>Приложение</Text>
+            <Options title={lang} chosen={appLanguage} info={langs} funcToSubmit={setAppLanguage} />
+            <Options title='Theme' chosen={chosenTheme} info={themes} funcToSubmit={setchosenTheme} />
+            <Options title='Currency' chosen={chosenCurrency} info={currency} cancelIndex={3} funcToSubmit={setchosenCurrency} />
+            <Text style={styles.optionsName}>Безопасность</Text>
+            <Text>Смена пароля</Text>
+            <Text>Смена электронной почты</Text>
 
-                    <FlatList
-                        data={langs}
-                        renderItem={(item) => {
-                            return (
-                                <TouchableOpacity onPress={() => {
-                                    setAppLanguage(item.item);
-                                }}>
-                                    <Text style={styles.text}>{item.item}</Text>
-                                </TouchableOpacity>
-                            )
-                        }}
-                        keyExtractor={(item, index) => index.toString()}
-                    />
 
-                </View>
-                <TouchableOpacity
-                    onPress={handleSignOut}
-                    style={styles.button}
-                >
-                    <Text style={styles.buttonText}>{signOut}</Text>
-                </TouchableOpacity>
-            </View>
-        </LinearGradient>
+            <TouchableOpacity
+                onPress={handleSignOut}
+                style={styles.buttonSignOut}
+            >
+                <Text style={styles.buttonText}>{signOut}</Text>
+            </TouchableOpacity>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
-    button: {
+    buttonSignOut: {
         backgroundColor: '#F6F0F0',
         padding: 10,
         borderRadius: 10,
         alignItems: 'center',
         borderColor: colors.MAIN_GREEN,
         borderWidth: 3,
-        marginBottom: 10,
+        marginTop: 10,
         width: '55%'
     },
     buttonText: {
@@ -82,14 +72,24 @@ const styles = StyleSheet.create({
     },
     language: {
         paddingTop: 10,
-        color: 'white',
+        color: 'black',
         fontSize: 20,
         fontWeight: '700'
         // textAlign: 'center',
     },
     text: {
-        color: "white"
-    }
+        color: "black"
+    },
+    settingsRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 10
+    },
+    optionsName: {
+        color: colors.TEXT_GRAY, fontSize: 15, fontWeight: '700',
+        marginTop: 10
+    },
 })
 
 export default SettingsPage

@@ -6,6 +6,7 @@ import FilterCategory from './FilterCategory'
 import Search from './Search'
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTranslation } from '../../Localization/Translations'
+import { useNavigation } from '@react-navigation/native'
 
 const Header = () => {
     const { goodMorning, goodAfternoon, goodEvening, goodNight, calendar, purchaseHistory } = useTranslation()
@@ -14,6 +15,7 @@ const Header = () => {
         const userName = auth.currentUser?.email
         const date = new Date()
         const currHour = date.getHours()
+        console.log(currHour)
         if ((currHour >= 6) & (currHour <= 12)) {
             return <Text style={stylesCreated.meeting}>{goodMorning}, {userName}!</Text>
         }
@@ -23,11 +25,12 @@ const Header = () => {
         else if ((currHour >= 18) & (currHour <= 22)) {
             return <Text style={stylesCreated.meeting}>{goodEvening}, {userName}!</Text>
         }
-        else {
+        else if ((currHour >= 23) & (currHour <= 5)) {
             return <Text style={stylesCreated.meeting}>{goodNight}, {userName}!</Text>
         }
     }
 
+    const navigation = useNavigation()
 
     return (
         <LinearGradient colors={[colors.MAIN_GREEN, '#68BA8E',]}>
@@ -45,15 +48,17 @@ const Header = () => {
                     }}
                 >
                     <View>
-                        <TouchableHighlight
-                        // onPress={() => Linking.openURL('https://google.com')}
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate("Settings")}
                         >
                             <Meeting />
 
-                        </TouchableHighlight>
+                        </TouchableOpacity>
                     </View>
                     <View>
-                        <TouchableHighlight>
+                        <TouchableOpacity style={{
+                            paddingTop: 20, paddingBottom: 20
+                        }} onPress={() => navigation.navigate("Settings")}>
                             <Image
                                 source={
                                     require('../../images/right-arrow.png')
@@ -66,7 +71,7 @@ const Header = () => {
                                 }}
                                 tintColor='white'
                             />
-                        </TouchableHighlight>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <Search />
@@ -77,9 +82,9 @@ const Header = () => {
                     marginTop: 10,
                 }}>
                     <Text style={{ color: 'white', fontSize: 24, fontWeight: '700', }}>{purchaseHistory}</Text>
-                    <TouchableHighlight>
+                    <TouchableOpacity>
                         <Text style={{ color: '#F4E2E2', fontSize: 17, fontWeight: '500', }}>{calendar} </Text>
-                    </TouchableHighlight>
+                    </TouchableOpacity>
 
 
                 </View>

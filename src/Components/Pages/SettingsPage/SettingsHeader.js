@@ -10,7 +10,11 @@ const SettingsHeader = () => {
     const { settings } = useTranslation()
     return (
         <LinearGradient colors={[colors.MAIN_GREEN, '#68BA8E',]}>
-            <View >
+            <View style={{
+                padding: 24,
+                paddingTop: 30,
+                paddingBottom: 25,
+            }}>
                 <Search />
                 <View style={{
                     flexDirection: 'row',

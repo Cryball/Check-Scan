@@ -1,79 +1,10 @@
 import React from 'react'
 import { TouchableOpacity, Text, TouchableHighlight, View, TextInput, StyleSheet, FlatList, Dimensions } from 'react-native'
-import { colors } from '../../../../constants'
+import { colors, data } from '../../../../constants'
 import Header from '../../Header/Header';
 
 const PurchaseHistory = () => {
-    const data = [
-        {
-            content: [
-                {
-                    id: 1, shop: 'Ярче1', shopCategory: 'Продукты питания', products: [
-                        {
-                            name: 'Вода',
-                            count: 1,
-                            price: '39.99'
-                        },
-                        {
-                            name: 'Шоколад',
-                            count: 3,
-                            price: '89.99'
-                        }],
-                    finalPrice: '309.96'
-                },
-                {
-                    id: 1, shop: 'Ярче2', shopCategory: 'Продукты питания', products: [
-                        {
-                            name: 'Вода',
-                            count: 1,
-                            price: '39.99'
-                        },
-                        {
-                            name: 'Шоколад',
-                            count: 3,
-                            price: '89.99'
-                        }],
-                    finalPrice: '696.96'
-                },
-            ],
-            date: '18.11.2021'
-        },
-        {
-            content: [
-                {
-                    id: 2, shop: 'CROPP', shopCategory: 'Одежда и обувь', products: [
-                        {
-                            name: 'Пальто',
-                            count: 1,
-                            price: '7990.00'
-                        },
-                    ],
-                    finalPrice: '7990.00'
-                },
-            ],
-            date: '15.11.2021'
-        },
-        {
-            content: [
-                {
-                    id: 3, shop: 'Пятерочка', shopCategory: 'Продукты питания', products: [
-                        {
-                            name: 'Печенье',
-                            count: 1,
-                            price: '49.99'
-                        },
-                    ],
-                    finalPrice: '49.99'
-                }
-            ],
-            date: '10.11.2021'
-        },
-    ];
-
-    //const size = Dimensions.get('window').width / numColumns;
-
     function sumFinalPrice(data) {
-        console.log(data[0].finalPrice)
         let sum = []
         for (let i = 0; i < data.length; i++) {
             sum.push(Number(data[i].finalPrice))
@@ -126,6 +57,7 @@ const PurchaseHistory = () => {
         <View style={{ flex: 1 }}>
             <Header />
             <Grid data={data} />
+            <Text style={{ color: 'white', marginTop: 40 }}>.</Text>
         </View>
     )
 }
@@ -173,6 +105,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         borderBottomColor: colors.LINE,
         borderBottomWidth: 2,
+        paddingBottom: 5
     },
     circle: {
         width: 45,

@@ -3,15 +3,16 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import en from './langs/en.json'
 import ru from './langs/ru.json'
 
-const DEFAULT_LANGUAGE = 'en';
+const DEFAULT_LANGUAGE = 'English';
 
 export const LanguageContext = createContext({
+    appLanguage: DEFAULT_LANGUAGE,
     setAppLanguage: () => { },
 });
 
 const languageObj = {
-    en: en,
-    ru: ru,
+    English: en,
+    Russian: ru,
 };
 
 export const LanguageContextProvider = ({ children }) => {
@@ -36,7 +37,8 @@ export const LanguageContextProvider = ({ children }) => {
     return (
         <LanguageContext.Provider value={{
             ...languageObj[selectedLanguage],
-            setAppLanguage: setLanguage, // 10
+            setAppLanguage: setLanguage,
+            appLanguage: selectedLanguage
         }}>
             {children}
         </LanguageContext.Provider>
