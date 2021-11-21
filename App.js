@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MyTabs from './src/Navigation/Navigation';
 import AutorizPage from './src/Components/Pages/AutorizPage/AutorizPage';
 import { LanguageContextProvider } from './src/Localization/Translations';
+import CurrentShopBills from './src/Components/Pages/CurrentShopBills/CurrentShopBills';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,7 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen options={{ headerShown: false }} name="Login" component={AutorizPage} />
           <Stack.Screen options={{ headerShown: false }} name="Home" component={MyTabs} />
+          <Stack.Screen options={{ headerShown: false }} name="CurrentShopBills" component={CurrentShopBills} />
         </Stack.Navigator>
       </LanguageContextProvider>
     </NavigationContainer>

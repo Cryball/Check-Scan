@@ -20,7 +20,8 @@ export const data = [
                         name: 'Шоколад',
                         count: 3,
                         price: '89.99'
-                    }],
+                    },
+                ],
                 finalPrice: '309.96'
             },
             {
@@ -76,6 +77,16 @@ export const data = [
                     },
                 ],
                 finalPrice: '49.99'
+            },
+            {
+                id: 3, shop: 'Ярче1', shopCategory: 'Продукты питания', products: [
+                    {
+                        name: 'Сок',
+                        count: 1,
+                        price: '79.99'
+                    },
+                ],
+                finalPrice: '79.99'
             }
         ],
         date: '10.11.2021'

@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, Image, TouchableHighlight, StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native'
 import { colors, data } from '../../../../constants';
+import { VictoryPie } from 'victory-native'
+
+const graphicColor = ['#388087', '#6fb3b8', '#badfe7', 'blue', 'red']; // Colors
 
 const DiagramCategory = () => {
     const [isPress, setIsPress] = useState(false);
-    function sumFinalPrice(data) {
-        let sum = []
-        for (let i = 0; i < data.length; i++) {
-            sum.push(Number(data[i].finalPrice))
-        }
-        return sum.reduce((partial_sum, a) => partial_sum + a, 0).toFixed(2)
-    }
+    const [selectedCategory, setselectedCategory] = useState(null)
 
-    function prepareChartData(data) {
+
+    function prepareChartDataShopCategory(data) {
         let sum = {}
         for (let i = 0; i < data.length; i++) {
             let currContent = data[i].content
@@ -40,10 +38,76 @@ const DiagramCategory = () => {
         }
         return finalChart
     }
-    const chartData = prepareChartData(data)
+
+    function prepareChartDataShop(data) {
+        let sum = {}
+        for (let i = 0; i < data.length; i++) {
+            let currContent = data[i].content
+            for (let j = 0; j < currContent.length; j++) {
+                if (sum[currContent[j].shop]) {
+                    sum[currContent[j].shop] += Number(currContent[j].finalPrice)
+                }
+                else {
+                    sum[currContent[j].shop] = Number(currContent[j].finalPrice)
+                }
+            }
+            //console.log(Object.keys(sum))
+        }
+        let keys = Object.keys(sum)
+        let values = Object.values(sum)
+        let finalChart = []
+        for (let k = 0; k < Object.keys(sum).length; k++) {
+            let _ =
+            {
+                label: keys[k],
+                y: values[k]
+            }
+            finalChart.push(_)
+        }
+        return finalChart
+    }
+
+    const chartData = prepareChartDataShopCategory(data)
+
+    const chartDataShop = prepareChartDataShop(data)
+    //console.log(chartDataShop)
 
     return (
         <View>
+
+            <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: -20 }}>
+                <VictoryPie
+                    data={isPress ? chartDataShop : chartData}
+                    radius={(selectedCategory && selectedCategory.label == datum.label) ? 140 : 120}
+                    innerRadius={70}
+                    style={{
+                        labels: { display: 'none' },
+
+                    }}
+                    // events={[{
+                    //     target: "data",
+                    //     eventHandlers: {
+                    //         onclick: () => {
+                    //             return [
+                    //                 {
+                    //                     target: "data",
+                    //                     mutation: ({ style }) => {
+                    //                         return style.fill === "#c43a31" ? null : { style: { fill: "#c43a31" } };
+                    //                     }
+                    //                 }, {
+                    //                     target: "labels",
+                    //                     mutation: ({ text }) => {
+                    //                         return text === "clicked" ? null : { text: "clicked" };
+                    //                     }
+                    //                 }
+                    //             ];
+                    //         }
+                    //     }
+                    // }]}
+                    colorScale={graphicColor}
+                />
+            </View>
+
             <View style={styles.category}>
                 <TouchableOpacity style={isPress ? styles.buttonNormal : styles.buttonPressed}
                     onPress={() => (setIsPress(false))} >
@@ -54,13 +118,17 @@ const DiagramCategory = () => {
                 </TouchableOpacity>
             </View>
             <View>
-                <FlatList data={chartData}
+                <FlatList data={isPress ? chartDataShop : chartData}
                     keyExtractor={(item, index) => index.toString()}
-                    renderItem={(item) => {
+                    renderItem={({ item, index }) => {
+                        //console.log(item, "item", index)
                         return (
-                            <View style={styles.category}>
-                                <Text style={{ fontSize: 16 }}>{item.item.label}</Text>
-                                <Text style={{ fontSize: 16 }}>{item.item.y} ₽</Text>
+                            <View style={{
+                                ...styles.category, backgroundColor: graphicColor[index],
+                                borderRadius: 10, marginBottom: 5, marginTop: 5
+                            }}>
+                                <Text style={{ fontSize: 16 }}>{item.label}</Text>
+                                <Text style={{ fontSize: 16 }}>{item.y} ₽</Text>
                             </View>
                         )
                     }}
@@ -88,7 +156,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 3,
         paddingLeft: 20,
         paddingRight: 20
-    }
+    },
 })
 
 export default DiagramCategory

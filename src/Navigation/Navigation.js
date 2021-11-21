@@ -7,6 +7,7 @@ import PhotoPage from '../Components/Pages/PhotoPage/PhotoPage';
 import { colors } from '../../constants';
 import { View, Text, Image, TouchableHighlight } from 'react-native'
 import { useTranslation } from '../Localization/Translations';
+import CurrentShopBills from '../Components/Pages/CurrentShopBills/CurrentShopBills';
 
 const Tab = createBottomTabNavigator();
 
@@ -102,6 +103,22 @@ const MyTabs = () => {
                     </View>
                 ),
             }} />
+            {/* <Tab.Screen name="CurrentShopBills" component={CurrentShopBills} options={{
+                tabBarIcon: ({ focused }) => (
+                    <View style={{ alignItems: 'center', justifyContent: 'center', }}>
+                        <Image
+                            source={require('../images/settings.png')}
+                            resizeMode='contain'
+                            style={{
+                                width: 25,
+                                height: 25,
+                                tintColor: focused ? colors.MAIN_GREEN : '#748c94'
+                            }}
+                        />
+                        <Text style={{ color: focused ? colors.MAIN_GREEN : '#748c94', fontSize: 10 }}>How will</Text>
+                    </View>
+                ),
+            }} /> */}
         </Tab.Navigator>
     );
 }

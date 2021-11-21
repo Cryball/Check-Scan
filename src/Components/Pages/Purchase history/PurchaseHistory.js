@@ -1,9 +1,17 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react'
 import { TouchableOpacity, Text, TouchableHighlight, View, TextInput, StyleSheet, FlatList, Dimensions } from 'react-native'
 import { colors, data } from '../../../../constants'
 import Header from '../../Header/Header';
+import CurrentShopBills from '../CurrentShopBills/CurrentShopBills';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const PurchaseHistory = () => {
+
+    const navigation = useNavigation()
+    const Stack = createNativeStackNavigator();
+
     function sumFinalPrice(data) {
         let sum = []
         for (let i = 0; i < data.length; i++) {
@@ -27,19 +35,28 @@ const PurchaseHistory = () => {
                             {item.item.content.map(i => {
                                 //console.log(i.finalPrice);
                                 return (
-                                    <View style={styles.shopRow}>
-                                        <View style={styles.circle}></View>
-                                        <View style={{
-                                            flexDirection: 'column',
+                                    <TouchableOpacity
+                                        onPress={() => navigation.navigate('CurrentShopBills', {
+                                            shop: i.shop,
+                                            shopCategory: i.shopCategory,
+                                            finalPrice: i.finalPrice,
+                                            products: i.products
+                                        })}
+                                    >
+                                        <View style={styles.shopRow}>
+                                            <View style={styles.circle}></View>
+                                            <View style={{
+                                                flexDirection: 'column',
 
-                                        }}>
-                                            <Text style={styles.shop}>{i.shop}</Text>
-                                            <Text style={styles.shopCategory}>{i.shopCategory}</Text>
+                                            }}>
+                                                <Text style={styles.shop}>{i.shop}</Text>
+                                                <Text style={styles.shopCategory}>{i.shopCategory}</Text>
+                                            </View>
+                                            <View>
+                                                <Text style={{ marginLeft: 80, fontWeight: '700', fontSize: 20 }}>{i.finalPrice} ₽</Text>
+                                            </View>
                                         </View>
-                                        <View>
-                                            <Text style={{ marginLeft: 80, fontWeight: '700', fontSize: 20 }}>{i.finalPrice} ₽</Text>
-                                        </View>
-                                    </View>)
+                                    </TouchableOpacity>)
                             })}
                         </View>
 
@@ -53,12 +70,18 @@ const PurchaseHistory = () => {
         );
     }
 
+    function PurchaseScreen() {
+        return (
+            <View style={{ flex: 1 }}>
+                <Header />
+                <Grid data={data} />
+                <Text style={{ color: 'white', marginTop: 40 }}>.</Text>
+            </View>
+        )
+    }
+
     return (
-        <View style={{ flex: 1 }}>
-            <Header />
-            <Grid data={data} />
-            <Text style={{ color: 'white', marginTop: 40 }}>.</Text>
-        </View>
+        <PurchaseScreen />
     )
 }
 

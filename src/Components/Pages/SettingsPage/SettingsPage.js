@@ -14,10 +14,13 @@ const SettingsPage = () => {
 
     const {
         setAppLanguage,
-        appLanguage
+        appLanguage,
+        initializeAppLanguage
     } = useContext(LanguageContext);
 
-    const langs = ['Russian', 'English', 'Cancel']
+    initializeAppLanguage()
+
+    const langs = ['Русский', 'English', 'Cancel']
     const themes = ['Default', 'Dark', 'Cancel']
     const currency = ['₽', '$', '₴', 'Cancel']
 

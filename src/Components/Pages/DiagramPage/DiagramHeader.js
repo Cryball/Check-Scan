@@ -30,20 +30,4 @@ const DiagramHeader = () => {
     )
 }
 
-const stylesCreated = StyleSheet.create({
-    input: {
-        height: 40,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-        backgroundColor: '#fff',
-        borderRadius: 10,
-    },
-    meeting: {
-        color: 'white',
-        fontSize: 24,
-        fontWeight: '700',
-    }
-})
-
 export default DiagramHeader

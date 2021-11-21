@@ -23,37 +23,38 @@ function AddonToSeach() {
 const Search = () => {
     const { searchByApp } = useTranslation()
     return (
-        <View>
+
+        <View style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+        }}>
+            <TextInput
+                style={stylesCreated.input}
+                placeholder={searchByApp}
+                placeholderTextColor='#FFFBFB' />
+
             <View style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
+                width: 45,
+                height: 45,
+                backgroundColor: colors.LIGHT_GREEN,
+                borderRadius: 40
             }}>
-                <TextInput
-                    style={stylesCreated.input}
-                    placeholder={searchByApp}
-                    placeholderTextColor='#FFFBFB' />
-                <View style={{
-                    width: 45,
-                    height: 45,
-                    backgroundColor: colors.LIGHT_GREEN,
-                    borderRadius: 40
-                }}>
-                    <TouchableHighlight>
-                        <Image
-                            style={{
-                                width: 35,
-                                height: 35,
-                                marginRight: 9,
-                                margin: 4
-                            }}
-                            source={require('./magnifier.png')}
-                            tintColor='#FFFBFB'
-                        />
-                    </TouchableHighlight>
-                </View>
+                <TouchableHighlight>
+                    <Image
+                        style={{
+                            width: 35,
+                            height: 35,
+                            marginRight: 9,
+                            margin: 4
+                        }}
+                        source={require('./magnifier.png')}
+                        tintColor='#FFFBFB'
+                    />
+                </TouchableHighlight>
             </View>
         </View>
+
 
     )
 }

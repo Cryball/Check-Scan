@@ -15,7 +15,6 @@ const Header = () => {
         const userName = auth.currentUser?.email
         const date = new Date()
         const currHour = date.getHours()
-        console.log(currHour)
         if ((currHour >= 6) & (currHour <= 12)) {
             return <Text style={stylesCreated.meeting}>{goodMorning}, {userName}!</Text>
         }

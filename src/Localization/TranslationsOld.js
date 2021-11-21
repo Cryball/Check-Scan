@@ -26,24 +26,24 @@ export const LocalizationProvider = ({ children }) => {
     // 12
     const initializeAppLanguage = async () => {
         const currentLanguage = await AsyncStorage.getItem(APP_LANGUAGE);
-        console.log(currentLanguage, 'CURR LANG')
-        setLanguage(currentLanguage);
-
-
-        // else {
-        //     let localeCode = DEFAULT_LANGUAGE;
-        //     const supportedLocaleCodes = translations.getAvailableLanguages();
-        //     const phoneLocaleCodes = RNLocalize.getLocales().map(
-        //         locale => locale.languageCode,
-        //     );
-        //     phoneLocaleCodes.some(code => {
-        //         if (supportedLocaleCodes.includes(code)) {
-        //             localeCode = code;
-        //             return true;
-        //         }
-        //     });
-        //     setLanguage(localeCode);
-        // }
+        if (currentLanguage) {
+            console.log(currentLanguage, 'CURR LANG')
+            setLanguage(currentLanguage);
+        }
+        else {
+            let localeCode = DEFAULT_LANGUAGE;
+            const supportedLocaleCodes = translations.getAvailableLanguages();
+            const phoneLocaleCodes = RNLocalize.getLocales().map(
+                locale => locale.languageCode,
+            );
+            phoneLocaleCodes.some(code => {
+                if (supportedLocaleCodes.includes(code)) {
+                    localeCode = code;
+                    return true;
+                }
+            });
+            setLanguage(localeCode);
+        }
     };
     return (
         <LocalizationContext.Provider
