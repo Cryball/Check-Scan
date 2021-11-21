@@ -5,21 +5,31 @@ import { colors, data } from '../../../../constants';
 import { LinearGradient } from 'expo-linear-gradient';
 import Search from '../../Header/Search';
 import CurrentShopBillsHeader from './CurrentShopBillsHeader';
+import { backgroundPic, chooseColor } from '../../utils/categoryHelper';
+import { useTranslation } from '../../../Localization/Translations';
 
 const CurrentShopBills = ({ route }) => {
+    const { receipt, viewScan, amount, price, productName } = useTranslation()
     const navigation = useNavigation()
     const { shop, shopCategory, finalPrice, products } = route.params
     return (
         <View style={{ flex: 1 }}>
             <CurrentShopBillsHeader />
             <View style={{ alignItems: 'center', flexDirection: 'column', margin: 50 }}>
-                <View style={{
-                    width: 60,
-                    height: 60,
-                    backgroundColor: colors.TEXT_GRAY,
-                    borderRadius: 40,
-                    marginRight: 10
-                }}></View>
+                <View style={{ ...styles.circle, backgroundColor: chooseColor(shopCategory) }}>
+                    <Image
+                        source={
+                            backgroundPic(shopCategory)
+                        }
+                        style={{
+                            width: 60,
+                            height: 60,
+                            marginTop: 6,
+
+                        }}
+                    //tintColor='white'
+                    />
+                </View>
                 <Text style={{ fontSize: 30, fontWeight: '700', marginTop: 30 }}>{shop}</Text>
                 <Text style={{ fontSize: 18, fontWeight: '700', color: colors.TEXT_GRAY }}>{shopCategory}</Text>
                 <Text style={{ fontSize: 30, fontWeight: '700', margin: 10 }}>{finalPrice} ₽</Text>
@@ -28,16 +38,16 @@ const CurrentShopBills = ({ route }) => {
             <View style={{ padding: 10, backgroundColor: 'white', flex: 1 }}>
                 <View style={styles.receiptScan}>
 
-                    <Text style={{ fontWeight: '700', fontSize: 25 }}>Чек</Text>
+                    <Text style={{ fontWeight: '700', fontSize: 25 }}>{receipt}</Text>
 
                     <TouchableOpacity>
-                        <Text style={{ fontWeight: '700', fontSize: 18, color: colors.TEXT_GRAY }}>Посмотреть скан</Text>
+                        <Text style={{ fontWeight: '700', fontSize: 18, color: colors.TEXT_GRAY }}>{viewScan}</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.category}>
-                    <Text style={{ fontSize: 16 }}>Название продукта</Text>
-                    <Text style={{ fontSize: 16 }}>Количество</Text>
-                    <Text style={{ fontSize: 16 }}>Цена</Text>
+                    <Text style={{ fontSize: 16 }}>{productName}</Text>
+                    <Text style={{ fontSize: 16 }}>{amount}</Text>
+                    <Text style={{ fontSize: 16 }}>{price}</Text>
                 </View>
 
                 <FlatList
@@ -76,6 +86,13 @@ const styles = StyleSheet.create({
     data: {
         alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between',
         backgroundColor: 'white', padding: 10, marginBottom: 10,
+    },
+    circle: {
+        width: 80,
+        height: 80,
+        borderRadius: 40,
+        marginRight: 10,
+        alignItems: 'center'
     },
 
 })

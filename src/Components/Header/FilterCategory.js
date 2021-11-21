@@ -1,8 +1,12 @@
 import React from 'react'
 import { Image, Text, TouchableHighlight, View, TextInput, StyleSheet, FlatList } from 'react-native'
+import { colors } from '../../../constants';
 
 const FilterCategory = () => {
-    function Slide({ data }) {
+
+    const colorData = [colors.PRODUCT, colors.CLOTHES, colors.SPORT, colors.CAFE]
+
+    function Slide({ data, index }) {
         return (
             <View
                 style={{
@@ -12,7 +16,7 @@ const FilterCategory = () => {
                     alignItems: "center",
                     marginRight: 10,
                     borderRadius: 12,
-                    backgroundColor: '#C4C4C4',
+                    backgroundColor: colorData[index]
                 }}
             >
                 <TouchableHighlight>
@@ -28,7 +32,7 @@ const FilterCategory = () => {
                 data={["Продукты питания", "Одежда и обувь", "Спортивные товары", "Кафе и рестораны"]}
                 style={{ flex: 1 }}
                 renderItem={({ item, index }) => {
-                    return <Slide data={item} key={index} />;
+                    return <Slide data={item} index={index} />;
                 }}
                 keyExtractor={(item, index) => index.toString()}
                 horizontal

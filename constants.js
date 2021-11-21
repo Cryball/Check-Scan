@@ -3,14 +3,18 @@ export const colors = {
     MAIN_WHITE: '#FFFCFC',
     TEXT_GRAY: '#9E9292',
     LIGHT_GREEN: '#B8DBB5',
-    LINE: '#DBC5C5'
+    LINE: '#DBC5C5',
+    PRODUCT: '#DABE2D',
+    CLOTHES: '#B42D2D',
+    SPORT: '#1F8823',
+    CAFE: '#1D90C1'
 }
 
 export const data = [
     {
         content: [
             {
-                id: 1, shop: 'Ярче1', shopCategory: 'Продукты питания', products: [
+                id: 1, shop: 'Ярче', shopCategory: 'Продукты питания', color: '#ECCB21', products: [
                     {
                         name: 'Вода',
                         count: 1,
@@ -25,21 +29,21 @@ export const data = [
                 finalPrice: '309.96'
             },
             {
-                id: 1, shop: 'Ярче2', shopCategory: 'Продукты питания', products: [
+                id: 1, shop: 'Спортмастер', shopCategory: 'Спортивные товары', color: '#1F8823', products: [
                     {
-                        name: 'Вода',
-                        count: 1,
-                        price: '39.99'
+                        name: 'Теннисная ракетка',
+                        count: 2,
+                        price: '5000.00'
                     },
                     {
-                        name: 'Шоколад',
-                        count: 3,
-                        price: '89.99'
+                        name: 'Теннисный шарик',
+                        count: 5,
+                        price: '299.99'
                     }],
-                finalPrice: '696.96'
+                finalPrice: '5299.00'
             },
             {
-                id: 3, shop: 'HOUSE', shopCategory: 'Одежда и обувь', products: [
+                id: 3, shop: 'HOUSE', shopCategory: 'Одежда и обувь', color: '#B42D2D', products: [
                     {
                         name: 'Носки',
                         count: 1,
@@ -54,7 +58,7 @@ export const data = [
     {
         content: [
             {
-                id: 2, shop: 'CROPP', shopCategory: 'Одежда и обувь', products: [
+                id: 2, shop: 'CROPP', shopCategory: 'Одежда и обувь', color: '#B42D2D', products: [
                     {
                         name: 'Пальто',
                         count: 1,
@@ -69,7 +73,7 @@ export const data = [
     {
         content: [
             {
-                id: 3, shop: 'Пятерочка', shopCategory: 'Продукты питания', products: [
+                id: 3, shop: 'Пятерочка', shopCategory: 'Продукты питания', color: '#ECCB21', products: [
                     {
                         name: 'Печенье',
                         count: 1,
@@ -79,14 +83,14 @@ export const data = [
                 finalPrice: '49.99'
             },
             {
-                id: 3, shop: 'Ярче1', shopCategory: 'Продукты питания', products: [
+                id: 3, shop: 'Spot and choos', shopCategory: 'Кафе и рестораны', color: '#1D90C1', products: [
                     {
-                        name: 'Сок',
+                        name: 'Чизбургер',
                         count: 1,
-                        price: '79.99'
+                        price: '300.00'
                     },
                 ],
-                finalPrice: '79.99'
+                finalPrice: '300.00'
             }
         ],
         date: '10.11.2021'

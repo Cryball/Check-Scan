@@ -19,5 +19,21 @@
   "emailText": "Email",
   "passwordText": "Password",
   "profile": "Profile",
-  "lang": "Language"
+  "lang": "Language",
+  "total": "Total",
+  "categories": "Categories",
+  "shops": "Shops",
+  "november": "November",
+  "cancel": "Cancel",
+  "app": "App",
+  "security": "Security",
+  "changeP": "Change password",
+  "changeE": "Change email",
+  "receipt": "Receipt",
+  "productName": "Product name",
+  "amount": "Amount",
+  "price": "Price",
+  "viewScan": "View scan",
+  "theme": "Theme",
+  "currency": "Currency"
 }

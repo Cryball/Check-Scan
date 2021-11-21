@@ -4,8 +4,11 @@ import DiagramHeader from './DiagramHeader'
 import { VictoryPie } from 'victory-native'
 import { data } from '../../../../constants';
 import DiagramCategory from './DiagramCategory';
+import { useTranslation } from '../../../Localization/Translations';
 
 const DiagramPage = () => {
+
+    const { november } = useTranslation()
 
     function sumAllPrice(data) {
         let sum = []
@@ -22,7 +25,7 @@ const DiagramPage = () => {
         <View style={{ flex: 1 }}>
             <DiagramHeader />
             <View style={styles.allSum}>
-                <Text style={{ fontWeight: '700', fontSize: 24 }}>Ноябрь</Text>
+                <Text style={{ fontWeight: '700', fontSize: 24 }}>{november}</Text>
                 <Text style={{ fontWeight: '700', fontSize: 24 }}>{sumAllPrice(data)} ₽</Text>
             </View>
             <FlatList

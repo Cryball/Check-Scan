@@ -6,6 +6,8 @@ import MyTabs from './src/Navigation/Navigation';
 import AutorizPage from './src/Components/Pages/AutorizPage/AutorizPage';
 import { LanguageContextProvider } from './src/Localization/Translations';
 import CurrentShopBills from './src/Components/Pages/CurrentShopBills/CurrentShopBills';
+import ChangePassword from './src/Components/Pages/SettingsPage/ChangePassword';
+import ChangeEmail from './src/Components/Pages/SettingsPage/ChangeEmail';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +19,8 @@ export default function App() {
           <Stack.Screen options={{ headerShown: false }} name="Login" component={AutorizPage} />
           <Stack.Screen options={{ headerShown: false }} name="Home" component={MyTabs} />
           <Stack.Screen options={{ headerShown: false }} name="CurrentShopBills" component={CurrentShopBills} />
+          <Stack.Screen options={{ headerShown: false }} name="changePassword" component={ChangePassword} />
+          <Stack.Screen options={{ headerShown: false }} name="changeEmail" component={ChangeEmail} />
         </Stack.Navigator>
       </LanguageContextProvider>
     </NavigationContainer>

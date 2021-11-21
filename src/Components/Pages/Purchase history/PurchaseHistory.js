@@ -1,16 +1,16 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react'
-import { TouchableOpacity, Text, TouchableHighlight, View, TextInput, StyleSheet, FlatList, Dimensions } from 'react-native'
+import { TouchableOpacity, Text, Image, View, TextInput, StyleSheet, FlatList, Dimensions } from 'react-native'
 import { colors, data } from '../../../../constants'
+import { useTranslation } from '../../../Localization/Translations';
 import Header from '../../Header/Header';
-import CurrentShopBills from '../CurrentShopBills/CurrentShopBills';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { backgroundPic, chooseColor } from '../../utils/categoryHelper';
 
 const PurchaseHistory = () => {
 
     const navigation = useNavigation()
-    const Stack = createNativeStackNavigator();
+
+    const { total } = useTranslation()
 
     function sumFinalPrice(data) {
         let sum = []
@@ -30,10 +30,9 @@ const PurchaseHistory = () => {
                         <View style={styles.itemContainer}>
                             <View style={styles.miniHeader}>
                                 <Text style={styles.text}>{item.item.date}</Text>
-                                <Text style={styles.text}>Итого: {sumFinalPrice(item.item.content)} ₽</Text>
+                                <Text style={styles.text}>{total}: {sumFinalPrice(item.item.content)} ₽</Text>
                             </View>
                             {item.item.content.map(i => {
-                                //console.log(i.finalPrice);
                                 return (
                                     <TouchableOpacity
                                         onPress={() => navigation.navigate('CurrentShopBills', {
@@ -44,7 +43,19 @@ const PurchaseHistory = () => {
                                         })}
                                     >
                                         <View style={styles.shopRow}>
-                                            <View style={styles.circle}></View>
+                                            <View style={{ ...styles.circle, backgroundColor: chooseColor(i.shopCategory) }}>
+                                                <Image
+                                                    source={
+                                                        backgroundPic(i.shopCategory)
+                                                    }
+                                                    style={{
+                                                        width: 35,
+                                                        height: 35,
+                                                        marginTop: 4
+                                                    }}
+                                                //tintColor='white'
+                                                />
+                                            </View>
                                             <View style={{
                                                 flexDirection: 'column',
 
@@ -133,9 +144,9 @@ const styles = StyleSheet.create({
     circle: {
         width: 45,
         height: 45,
-        backgroundColor: colors.TEXT_GRAY,
         borderRadius: 40,
-        marginRight: 10
+        marginRight: 10,
+        alignItems: 'center'
     },
 });
 

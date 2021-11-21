@@ -2,19 +2,20 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, Image, TouchableHighlight, StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native'
 import { colors, data } from '../../../../constants';
 import { VictoryPie } from 'victory-native'
+import { useTranslation } from '../../../Localization/Translations';
 
-const graphicColor = ['#388087', '#6fb3b8', '#badfe7', 'blue', 'red']; // Colors
+const graphicColor = [colors.PRODUCT, colors.SPORT, colors.CAFE, colors.CLOTHES, '#badfe7', '#07B29E']; // Colors
 
 const DiagramCategory = () => {
     const [isPress, setIsPress] = useState(false);
     const [selectedCategory, setselectedCategory] = useState(null)
 
+    const { categories, shops, } = useTranslation()
 
     function prepareChartDataShopCategory(data) {
         let sum = {}
         for (let i = 0; i < data.length; i++) {
             let currContent = data[i].content
-            //console.log(i)
             for (let j = 0; j < currContent.length; j++) {
                 if (sum[currContent[j].shopCategory]) {
                     sum[currContent[j].shopCategory] += Number(currContent[j].finalPrice)
@@ -23,7 +24,6 @@ const DiagramCategory = () => {
                     sum[currContent[j].shopCategory] = Number(currContent[j].finalPrice)
                 }
             }
-            //console.log(Object.keys(sum))
         }
         let keys = Object.keys(sum)
         let values = Object.values(sum)
@@ -32,7 +32,7 @@ const DiagramCategory = () => {
             let _ =
             {
                 label: keys[k],
-                y: values[k]
+                y: values[k],
             }
             finalChart.push(_)
         }
@@ -51,7 +51,6 @@ const DiagramCategory = () => {
                     sum[currContent[j].shop] = Number(currContent[j].finalPrice)
                 }
             }
-            //console.log(Object.keys(sum))
         }
         let keys = Object.keys(sum)
         let values = Object.values(sum)
@@ -70,7 +69,10 @@ const DiagramCategory = () => {
     const chartData = prepareChartDataShopCategory(data)
 
     const chartDataShop = prepareChartDataShop(data)
-    //console.log(chartDataShop)
+
+    const _color = data.map(i => i.content.map(j => j.color))
+    const mergedColor = [].concat.apply([], _color);
+    const colorArr = [...new Set(mergedColor)]
 
     return (
         <View>
@@ -104,17 +106,17 @@ const DiagramCategory = () => {
                     //         }
                     //     }
                     // }]}
-                    colorScale={graphicColor}
+                    colorScale={isPress ? graphicColor : colorArr}
                 />
             </View>
 
             <View style={styles.category}>
                 <TouchableOpacity style={isPress ? styles.buttonNormal : styles.buttonPressed}
                     onPress={() => (setIsPress(false))} >
-                    <Text style={{ fontWeight: '700', fontSize: 20 }}>Категории</Text>
+                    <Text style={{ fontWeight: '700', fontSize: 20 }}>{categories}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={isPress ? styles.buttonPressed : styles.buttonNormal} onPress={() => (setIsPress(true))}>
-                    <Text style={{ fontWeight: '700', fontSize: 20 }}>Магазины</Text>
+                    <Text style={{ fontWeight: '700', fontSize: 20 }}>{shops}</Text>
                 </TouchableOpacity>
             </View>
             <View>
@@ -124,11 +126,11 @@ const DiagramCategory = () => {
                         //console.log(item, "item", index)
                         return (
                             <View style={{
-                                ...styles.category, backgroundColor: graphicColor[index],
+                                ...styles.category, backgroundColor: isPress ? graphicColor[index] : colorArr[index],
                                 borderRadius: 10, marginBottom: 5, marginTop: 5
                             }}>
-                                <Text style={{ fontSize: 16 }}>{item.label}</Text>
-                                <Text style={{ fontSize: 16 }}>{item.y} ₽</Text>
+                                <Text style={{ fontSize: 16, fontWeight: '700' }}>{item.label}</Text>
+                                <Text style={{ fontSize: 16, fontWeight: '700' }}>{item.y} ₽</Text>
                             </View>
                         )
                     }}

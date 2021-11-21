@@ -1,14 +1,17 @@
 import { useNavigation } from '@react-navigation/native'
 import React, { useState, useContext, useRef } from 'react'
-import { View, Text, Image, TouchableHighlight, TouchableOpacity, StyleSheet, FlatList } from 'react-native'
+import { View, Text, Button, Image, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native'
 import { colors } from '../../../../constants'
 import { auth } from '../../../../firebase'
 import { LanguageContext, useTranslation } from '../../../Localization/Translations';
 import SettingsHeader from './SettingsHeader'
 import Options from './Options'
+import * as firebase from 'firebase';
+import changePassword from './ChangePassword'
 
 const SettingsPage = () => {
-    const { lang, signOut } = useTranslation()
+    const { lang, signOut, cancel, app, security, changeP, changeE, theme, currency } = useTranslation()
+
     const [chosenTheme, setchosenTheme] = useState('Default')
     const [chosenCurrency, setchosenCurrency] = useState('₽')
 
@@ -20,9 +23,9 @@ const SettingsPage = () => {
 
     initializeAppLanguage()
 
-    const langs = ['Русский', 'English', 'Cancel']
-    const themes = ['Default', 'Dark', 'Cancel']
-    const currency = ['₽', '$', '₴', 'Cancel']
+    const langsArr = ['Русский', 'English', cancel]
+    const themesArr = ['Default', 'Dark', cancel]
+    const currencyArr = ['₽', '$', '€', cancel]
 
     const navigation = useNavigation()
 
@@ -36,23 +39,62 @@ const SettingsPage = () => {
     }
 
     return (
-        <View style={{ backgroundColor: 'white', flex: 1 }}>
+        <View style={{ backgroundColor: 'white', flex: 1, }}>
             <SettingsHeader />
-            <Text style={styles.optionsName}>Приложение</Text>
-            <Options title={lang} chosen={appLanguage} info={langs} funcToSubmit={setAppLanguage} />
-            <Options title='Theme' chosen={chosenTheme} info={themes} funcToSubmit={setchosenTheme} />
-            <Options title='Currency' chosen={chosenCurrency} info={currency} cancelIndex={3} funcToSubmit={setchosenCurrency} />
-            <Text style={styles.optionsName}>Безопасность</Text>
-            <Text>Смена пароля</Text>
-            <Text>Смена электронной почты</Text>
+            <View style={{ padding: 10 }}>
+                <Text style={styles.optionsName}>{app}</Text>
+                <Options title={lang} chosen={appLanguage} info={langsArr} funcToSubmit={setAppLanguage} />
+                <Options title={theme} chosen={chosenTheme} info={themesArr} funcToSubmit={setchosenTheme} />
+                <Options title={currency} chosen={chosenCurrency} info={currencyArr} cancelIndex={3} funcToSubmit={setchosenCurrency} />
+                <Text style={styles.optionsName}>{security}</Text>
+
+                <View style={styles.settingsRow}>
+                    <TouchableOpacity style={{ width: '80%' }} onPress={() => navigation.navigate('changePassword')}>
+                        <Text style={styles.language}>{changeP}</Text>
+                    </TouchableOpacity>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Image
+                            source={
+                                require('../../../images/right-arrow.png')
+                            }
+                            style={{
+                                width: 14,
+                                height: 14,
+                                marginLeft: 10
+
+                            }}
+                            tintColor='black'
+                        />
+                    </View>
+                </View>
+                <View style={styles.settingsRow}>
+                    <TouchableOpacity style={{ width: '80%' }} onPress={() => navigation.navigate('changeEmail')}>
+                        <Text style={styles.language}>{changeE}</Text>
+                    </TouchableOpacity>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Image
+                            source={
+                                require('../../../images/right-arrow.png')
+                            }
+                            style={{
+                                width: 14,
+                                height: 14,
+                                marginLeft: 10
+
+                            }}
+                            tintColor='black'
+                        />
+                    </View>
+                </View>
 
 
-            <TouchableOpacity
-                onPress={handleSignOut}
-                style={styles.buttonSignOut}
-            >
-                <Text style={styles.buttonText}>{signOut}</Text>
-            </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={handleSignOut}
+                    style={styles.buttonSignOut}
+                >
+                    <Text style={styles.buttonText}>{signOut}</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }
@@ -79,9 +121,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '700'
         // textAlign: 'center',
-    },
-    text: {
-        color: "black"
     },
     settingsRow: {
         flexDirection: 'row',
