@@ -8,6 +8,7 @@ import { LanguageContextProvider } from './src/Localization/Translations';
 import CurrentShopBills from './src/Components/Pages/CurrentShopBills/CurrentShopBills';
 import ChangePassword from './src/Components/Pages/SettingsPage/ChangePassword';
 import ChangeEmail from './src/Components/Pages/SettingsPage/ChangeEmail';
+import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 

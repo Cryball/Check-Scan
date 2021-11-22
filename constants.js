@@ -51,7 +51,17 @@ export const data = [
                     },
                 ],
                 finalPrice: '109.99'
-            }
+            },
+            {
+                id: 3, shop: 'Пятерочка', shopCategory: 'Продукты питания', color: '#ECCB21', products: [
+                    {
+                        name: 'Печенье',
+                        count: 1,
+                        price: '49.99'
+                    },
+                ],
+                finalPrice: '49.99'
+            },
         ],
         date: '18.11.2021'
     },

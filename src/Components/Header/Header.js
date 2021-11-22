@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Image, Linking, Text, TouchableHighlight, View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import { colors } from '../../../constants'
 import { auth } from '../../../firebase'
-import FilterCategory from './FilterCategory'
 import Search from './Search'
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTranslation } from '../../Localization/Translations'
@@ -34,9 +33,9 @@ const Header = () => {
     return (
         <LinearGradient colors={[colors.MAIN_GREEN, '#68BA8E',]}>
             <View style={{
-                padding: 24,
+                paddingHorizontal: 24,
                 paddingTop: 30,
-                paddingBottom: 25,
+                //paddingBottom: 25,
                 //backgroundColor: colors.MAIN_GREEN,
             }}>
                 <View
@@ -87,7 +86,6 @@ const Header = () => {
 
 
                 </View>
-                <FilterCategory />
             </View>
         </LinearGradient>
     )

@@ -1,10 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react'
-import { TouchableOpacity, Text, Image, View, TextInput, StyleSheet, FlatList, Dimensions } from 'react-native'
+import React, { useState } from 'react'
+import { TouchableOpacity, Text, Image, View, TextInput, StyleSheet, FlatList, } from 'react-native'
 import { colors, data } from '../../../../constants'
 import { useTranslation } from '../../../Localization/Translations';
 import Header from '../../Header/Header';
 import { backgroundPic, chooseColor } from '../../utils/categoryHelper';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const PurchaseHistory = () => {
 
@@ -20,58 +21,165 @@ const PurchaseHistory = () => {
         return sum.reduce((partial_sum, a) => partial_sum + a, 0).toFixed(2)
     }
 
+    function sumFinalPriceCurrCategory(priceArr) {
+        let sum = []
+        for (let i = 0; i < priceArr.length; i++) {
+            sum.push(Number(priceArr[i]))
+        }
+        return sum.reduce((partial_sum, a) => partial_sum + a, 0).toFixed(2)
+    }
+
+    const colorData = [colors.PRODUCT, colors.CLOTHES, colors.SPORT, colors.CAFE]
+
+    const [filteredCategory, setfilteredCategory] = useState('')
+
+    function Slide({ data, index }) {
+        return (
+            <View
+                style={{
+                    height: 70,
+                    width: 110,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginRight: 10,
+                    borderRadius: 12,
+                    backgroundColor: colorData[index]
+                }}
+            >
+                <TouchableOpacity onPress={() => { setfilteredCategory(data) }}>
+                    <Text style={{ fontSize: 14, color: 'white', fontWeight: '500' }}>{data}</Text>
+                </TouchableOpacity>
+            </View>
+        );
+    }
+
+    function Carousel() {
+        return (
+            <FlatList
+                data={["Продукты питания", "Одежда и обувь", "Спортивные товары", "Кафе и рестораны"]}
+                style={{ flex: 1 }}
+                renderItem={({ item, index }) => {
+                    return <Slide data={item} index={index} />;
+                }}
+                keyExtractor={(item, index) => index.toString()}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+            />
+        );
+    }
+
     function Grid(props) {
         return (
             <FlatList
                 data={props.data}
                 renderItem={(item) => {
-                    //console.log(item.item.content[1]);
-                    return (
-                        <View style={styles.itemContainer}>
-                            <View style={styles.miniHeader}>
-                                <Text style={styles.text}>{item.item.date}</Text>
-                                <Text style={styles.text}>{total}: {sumFinalPrice(item.item.content)} ₽</Text>
-                            </View>
-                            {item.item.content.map(i => {
-                                return (
-                                    <TouchableOpacity
-                                        onPress={() => navigation.navigate('CurrentShopBills', {
-                                            shop: i.shop,
-                                            shopCategory: i.shopCategory,
-                                            finalPrice: i.finalPrice,
-                                            products: i.products
-                                        })}
-                                    >
-                                        <View style={styles.shopRow}>
-                                            <View style={{ ...styles.circle, backgroundColor: chooseColor(i.shopCategory) }}>
-                                                <Image
-                                                    source={
-                                                        backgroundPic(i.shopCategory)
-                                                    }
-                                                    style={{
-                                                        width: 35,
-                                                        height: 35,
-                                                        marginTop: 4
-                                                    }}
-                                                //tintColor='white'
-                                                />
-                                            </View>
-                                            <View style={{
-                                                flexDirection: 'column',
-
-                                            }}>
-                                                <Text style={styles.shop}>{i.shop}</Text>
-                                                <Text style={styles.shopCategory}>{i.shopCategory}</Text>
-                                            </View>
-                                            <View>
-                                                <Text style={{ marginLeft: 80, fontWeight: '700', fontSize: 20 }}>{i.finalPrice} ₽</Text>
-                                            </View>
+                    let check = (item.item.content.filter(i => (filteredCategory.length === 0 ? i.shopCategory : i.shopCategory === filteredCategory))).length
+                    let priceCurrCategoryArr = (item.item.content.filter(i => (i.shopCategory === filteredCategory))).map(j => j.finalPrice)
+                    if (check === 0) {
+                        return null
+                    }
+                    else {
+                        return (
+                            <View style={styles.itemContainer}>
+                                {filteredCategory.length !== 0 ?
+                                    <View>
+                                        <View style={styles.miniHeader}>
+                                            <Text style={styles.text}>{item.item.date}</Text>
+                                            <Text style={styles.text}>{total}: {sumFinalPriceCurrCategory(priceCurrCategoryArr)} ₽</Text>
                                         </View>
-                                    </TouchableOpacity>)
-                            })}
-                        </View>
+                                        {item.item.content.map((i, index) => {
+                                            //console.log(i.shopCategory, index)
+                                            if (i.shopCategory === filteredCategory) {
+                                                return (
+                                                    <TouchableOpacity
+                                                        onPress={() => navigation.navigate('CurrentShopBills', {
+                                                            shop: i.shop,
+                                                            shopCategory: i.shopCategory,
+                                                            finalPrice: i.finalPrice,
+                                                            products: i.products
+                                                        })}
+                                                    >
+                                                        <View style={styles.shopRow}>
+                                                            <View style={{ ...styles.circle, backgroundColor: chooseColor(i.shopCategory) }}>
+                                                                <Image
+                                                                    source={
+                                                                        backgroundPic(i.shopCategory)
+                                                                    }
+                                                                    style={{
+                                                                        width: 35,
+                                                                        height: 35,
+                                                                        marginTop: 4
+                                                                    }}
+                                                                    tintColor='white'
+                                                                />
+                                                            </View>
+                                                            <View style={{
+                                                                flexDirection: 'column',
 
-                    )
+                                                            }}>
+                                                                <Text style={styles.shop}>{i.shop}</Text>
+                                                                <Text style={styles.shopCategory}>{i.shopCategory}</Text>
+                                                            </View>
+                                                            <View>
+                                                                <Text style={{ marginLeft: 80, fontWeight: '700', fontSize: 20 }}>{i.finalPrice} ₽</Text>
+                                                            </View>
+                                                        </View>
+                                                    </TouchableOpacity>)
+                                            }
+                                        })}
+                                    </View>
+
+                                    :
+                                    <View>
+                                        <View style={styles.miniHeader}>
+                                            <Text style={styles.text}>{item.item.date}</Text>
+                                            <Text style={styles.text}>{total}: {sumFinalPrice(item.item.content)} ₽</Text>
+                                        </View>
+                                        {item.item.content.map((i, index) => {
+                                            //console.log(i.shopCategory, index)
+                                            return (
+                                                <TouchableOpacity
+                                                    onPress={() => navigation.navigate('CurrentShopBills', {
+                                                        shop: i.shop,
+                                                        shopCategory: i.shopCategory,
+                                                        finalPrice: i.finalPrice,
+                                                        products: i.products
+                                                    })}
+                                                >
+                                                    <View style={styles.shopRow}>
+                                                        <View style={{ ...styles.circle, backgroundColor: chooseColor(i.shopCategory) }}>
+                                                            <Image
+                                                                source={
+                                                                    backgroundPic(i.shopCategory)
+                                                                }
+                                                                style={{
+                                                                    width: 35,
+                                                                    height: 35,
+                                                                    marginTop: 4
+                                                                }}
+                                                                tintColor='white'
+                                                            />
+                                                        </View>
+                                                        <View style={{
+                                                            flexDirection: 'column',
+
+                                                        }}>
+                                                            <Text style={styles.shop}>{i.shop}</Text>
+                                                            <Text style={styles.shopCategory}>{i.shopCategory}</Text>
+                                                        </View>
+                                                        <View>
+                                                            <Text style={{ marginLeft: 80, fontWeight: '700', fontSize: 20 }}>{i.finalPrice} ₽</Text>
+                                                        </View>
+                                                    </View>
+                                                </TouchableOpacity>)
+                                        }
+                                        )}
+                                    </View>
+
+                                }
+                            </View>
+                        )
+                    }
                 }}
                 keyExtractor={(item, index) => index.toString()}
                 numColumns={1}
@@ -81,18 +189,27 @@ const PurchaseHistory = () => {
         );
     }
 
-    function PurchaseScreen() {
-        return (
-            <View style={{ flex: 1 }}>
-                <Header />
-                <Grid data={data} />
-                <Text style={{ color: 'white', marginTop: 40 }}>.</Text>
-            </View>
-        )
-    }
-
     return (
-        <PurchaseScreen />
+        <View style={{ flex: 1 }}>
+            <Header />
+            <LinearGradient colors={[colors.MAIN_GREEN, '#68BA8E',]}>
+                <View style={{
+                    flexDirection: 'row',
+                    marginVertical: 15,
+                    paddingHorizontal: 24,
+                }}>
+                    <Carousel />
+                </View>
+                {filteredCategory.length !== 0 ? <View style={{ paddingHorizontal: 24, marginBottom: 15 }}>
+                    <TouchableOpacity onPress={() => { setfilteredCategory('') }}>
+                        <Text style={{ color: 'white', fontSize: 18 }}>Сбросить фильтр</Text>
+                    </TouchableOpacity>
+                </View> : null}
+            </LinearGradient>
+
+            <Grid data={data} />
+            <Text style={{ color: 'white', marginTop: 40 }}>.</Text>
+        </View>
     )
 }
 

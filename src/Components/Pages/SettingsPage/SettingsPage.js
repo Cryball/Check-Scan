@@ -87,13 +87,14 @@ const SettingsPage = () => {
                     </View>
                 </View>
 
-
-                <TouchableOpacity
-                    onPress={handleSignOut}
-                    style={styles.buttonSignOut}
-                >
-                    <Text style={styles.buttonText}>{signOut}</Text>
-                </TouchableOpacity>
+                <View style={{ alignItems: 'center' }}>
+                    <TouchableOpacity
+                        onPress={handleSignOut}
+                        style={styles.buttonSignOut}
+                    >
+                        <Text style={styles.buttonText}>{signOut}</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     )

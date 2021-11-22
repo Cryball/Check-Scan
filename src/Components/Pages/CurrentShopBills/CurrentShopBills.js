@@ -27,7 +27,7 @@ const CurrentShopBills = ({ route }) => {
                             marginTop: 6,
 
                         }}
-                    //tintColor='white'
+                        tintColor='white'
                     />
                 </View>
                 <Text style={{ fontSize: 30, fontWeight: '700', marginTop: 30 }}>{shop}</Text>
