@@ -21,8 +21,6 @@ const SettingsPage = () => {
         initializeAppLanguage
     } = useContext(LanguageContext);
 
-    initializeAppLanguage()
-
     const langsArr = ['Русский', 'English', cancel]
     const themesArr = ['Default', 'Dark', cancel]
     const currencyArr = ['₽', '$', '€', cancel]
@@ -43,9 +41,11 @@ const SettingsPage = () => {
             <SettingsHeader />
             <View style={{ padding: 10 }}>
                 <Text style={styles.optionsName}>{app}</Text>
+
                 <Options title={lang} chosen={appLanguage} info={langsArr} funcToSubmit={setAppLanguage} />
                 <Options title={theme} chosen={chosenTheme} info={themesArr} funcToSubmit={setchosenTheme} />
                 <Options title={currency} chosen={chosenCurrency} info={currencyArr} cancelIndex={3} funcToSubmit={setchosenCurrency} />
+
                 <Text style={styles.optionsName}>{security}</Text>
 
                 <View style={styles.settingsRow}>
@@ -70,6 +70,28 @@ const SettingsPage = () => {
                 <View style={styles.settingsRow}>
                     <TouchableOpacity style={{ width: '80%' }} onPress={() => navigation.navigate('changeEmail')}>
                         <Text style={styles.language}>{changeE}</Text>
+                    </TouchableOpacity>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Image
+                            source={
+                                require('../../../images/right-arrow.png')
+                            }
+                            style={{
+                                width: 14,
+                                height: 14,
+                                marginLeft: 10
+
+                            }}
+                            tintColor='black'
+                        />
+                    </View>
+                </View>
+
+                <Text style={styles.optionsName}>Дополнительно</Text>
+
+                <View style={styles.settingsRow}>
+                    <TouchableOpacity style={{ width: '80%' }} onPress={() => navigation.navigate('aboutDeveloper')}>
+                        <Text style={styles.language}>О разработчиках</Text>
                     </TouchableOpacity>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Image

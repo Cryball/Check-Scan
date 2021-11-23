@@ -78,6 +78,11 @@ const AutorizPage = () => {
                     <Text style={styles.buttonText}>{register}</Text>
                 </TouchableOpacity>
             </View>
+            <View>
+                <TouchableOpacity style={{ width: '80%' }} onPress={() => navigation.navigate('forgotPassword')}>
+                    <Text style={{ color: 'white', fontSize: 16, fontWeight: '700' }}>Забыли пароль?</Text>
+                </TouchableOpacity>
+            </View>
         </LinearGradient>
 
     )

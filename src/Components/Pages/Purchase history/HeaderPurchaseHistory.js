@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Image, Linking, Text, TouchableHighlight, View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
-import { colors } from '../../../constants'
-import { auth } from '../../../firebase'
-import Search from './Search'
+import { colors } from '../../../../constants'
+import { auth } from '../../../../firebase'
+import Search from '../../Search/Search'
 import { LinearGradient } from 'expo-linear-gradient';
-import { useTranslation } from '../../Localization/Translations'
+import { useTranslation } from '../../../Localization/Translations'
 import { useNavigation } from '@react-navigation/native'
 
-const Header = () => {
+const HeaderPurchaseHistory = () => {
     const { goodMorning, goodAfternoon, goodEvening, goodNight, calendar, purchaseHistory } = useTranslation()
 
     const Meeting = () => {
@@ -59,7 +59,7 @@ const Header = () => {
                         }} onPress={() => navigation.navigate("Settings")}>
                             <Image
                                 source={
-                                    require('../../images/right-arrow.png')
+                                    require('../../../images/right-arrow.png')
                                 }
                                 style={{
                                     width: 14,
@@ -107,4 +107,4 @@ const stylesCreated = StyleSheet.create({
     }
 })
 
-export default Header
+export default HeaderPurchaseHistory

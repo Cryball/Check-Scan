@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, Image, TouchableHighlight, StyleSheet, TouchableOpacity, FlatList, Button } from 'react-native'
 import { colors, data } from '../../../../constants';
 import { LinearGradient } from 'expo-linear-gradient';
-import Search from '../../Header/Search';
 
 const CurrentShopBillsHeader = () => {
     const navigation = useNavigation()

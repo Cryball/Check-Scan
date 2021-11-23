@@ -1,9 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { TouchableOpacity, Text, Image, View, TextInput, StyleSheet, FlatList, } from 'react-native'
 import { colors, data } from '../../../../constants'
-import { useTranslation } from '../../../Localization/Translations';
-import Header from '../../Header/Header';
+import { LanguageContext, useTranslation } from '../../../Localization/Translations';
+import HeaderPurchaseHistory from './HeaderPurchaseHistory';
 import { backgroundPic, chooseColor } from '../../utils/categoryHelper';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -12,6 +12,14 @@ const PurchaseHistory = () => {
     const navigation = useNavigation()
 
     const { total } = useTranslation()
+
+    const {
+        setAppLanguage,
+        appLanguage,
+        initializeAppLanguage
+    } = useContext(LanguageContext);
+
+    initializeAppLanguage()
 
     function sumFinalPrice(data) {
         let sum = []
@@ -191,7 +199,7 @@ const PurchaseHistory = () => {
 
     return (
         <View style={{ flex: 1 }}>
-            <Header />
+            <HeaderPurchaseHistory />
             <LinearGradient colors={[colors.MAIN_GREEN, '#68BA8E',]}>
                 <View style={{
                     flexDirection: 'row',

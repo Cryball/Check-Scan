@@ -3,7 +3,7 @@ import { Image, Linking, Text, TouchableHighlight, View, TextInput, StyleSheet, 
 import { useNavigation } from '@react-navigation/native'
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../../../constants'
-import Search from '../../Header/Search';
+import Search from '../../Search/Search';
 import { useTranslation } from '../../../Localization/Translations';
 
 const DiagramHeader = () => {

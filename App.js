@@ -9,6 +9,8 @@ import CurrentShopBills from './src/Components/Pages/CurrentShopBills/CurrentSho
 import ChangePassword from './src/Components/Pages/SettingsPage/ChangePassword';
 import ChangeEmail from './src/Components/Pages/SettingsPage/ChangeEmail';
 import { DefaultTheme, DarkTheme } from '@react-navigation/native';
+import AboutDeveloper from './src/Components/Pages/SettingsPage/AboutDeveloper';
+import ForgotPassword from './src/Components/Pages/AutorizPage/ForgotPassword';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +24,8 @@ export default function App() {
           <Stack.Screen options={{ headerShown: false }} name="CurrentShopBills" component={CurrentShopBills} />
           <Stack.Screen options={{ headerShown: false }} name="changePassword" component={ChangePassword} />
           <Stack.Screen options={{ headerShown: false }} name="changeEmail" component={ChangeEmail} />
+          <Stack.Screen options={{ headerShown: false }} name="aboutDeveloper" component={AboutDeveloper} />
+          <Stack.Screen options={{ headerShown: false }} name="forgotPassword" component={ForgotPassword} />
         </Stack.Navigator>
       </LanguageContextProvider>
     </NavigationContainer>
