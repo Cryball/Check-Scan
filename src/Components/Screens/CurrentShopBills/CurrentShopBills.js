@@ -7,10 +7,12 @@ import Search from '../../Search/Search';
 import CurrentShopBillsHeader from './CurrentShopBillsHeader';
 import { backgroundPic, chooseColor } from '../../utils/categoryHelper';
 import { useTranslation } from '../../../Localization/Translations';
+import { useSelector } from 'react-redux';
 
 const CurrentShopBillsScreen = ({ route }) => {
     const { receipt, viewScan, amount, price, productName } = useTranslation()
     const navigation = useNavigation()
+    const currency = useSelector(state => state.currency.currency)
     const { shop, shopCategory, finalPrice, products } = route.params
     return (
         <View style={{ flex: 1 }}>
@@ -32,7 +34,7 @@ const CurrentShopBillsScreen = ({ route }) => {
                 </View>
                 <Text style={{ fontSize: 30, fontWeight: '700', marginTop: 30 }}>{shop}</Text>
                 <Text style={{ fontSize: 18, fontWeight: '700', color: colors.TEXT_GRAY }}>{shopCategory}</Text>
-                <Text style={{ fontSize: 30, fontWeight: '700', margin: 10 }}>{finalPrice} ₽</Text>
+                <Text style={{ fontSize: 30, fontWeight: '700', margin: 10 }}>{finalPrice} {currency}</Text>
             </View>
 
             <View style={{ padding: 10, backgroundColor: 'white', flex: 1 }}>
@@ -58,7 +60,7 @@ const CurrentShopBillsScreen = ({ route }) => {
                             <View style={styles.data}>
                                 <Text style={{ fontSize: 16, width: '33%' }}>{item.item.name}</Text>
                                 <Text style={{ fontSize: 16, width: '-10%' }}>{item.item.count}</Text>
-                                <Text style={{ fontSize: 16, }}>{item.item.price} ₽</Text>
+                                <Text style={{ fontSize: 16, }}>{item.item.price} {currency}</Text>
                             </View>
                         )
                     }}

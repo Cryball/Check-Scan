@@ -6,24 +6,20 @@ import { auth } from '../../../../firebase'
 import { LanguageContext, useTranslation } from '../../../Localization/Translations';
 import SettingsHeader from './SettingsHeader'
 import Options from './Options'
-import * as firebase from 'firebase';
-import changePassword from './ChangePassword'
+import OptionForCurrency from './OptionForCurrency'
 
 const SettingsScreen = () => {
     const { lang, signOut, cancel, app, security, changeP, changeE, theme, currency } = useTranslation()
 
     const [chosenTheme, setchosenTheme] = useState('Default')
-    const [chosenCurrency, setchosenCurrency] = useState('₽')
 
     const {
         setAppLanguage,
         appLanguage,
-        initializeAppLanguage
     } = useContext(LanguageContext);
 
     const langsArr = ['Русский', 'English', cancel]
     const themesArr = ['Default', 'Dark', cancel]
-    const currencyArr = ['₽', '$', '€', cancel]
 
     const navigation = useNavigation()
 
@@ -44,7 +40,7 @@ const SettingsScreen = () => {
 
                 <Options title={lang} chosen={appLanguage} info={langsArr} funcToSubmit={setAppLanguage} />
                 <Options title={theme} chosen={chosenTheme} info={themesArr} funcToSubmit={setchosenTheme} />
-                <Options title={currency} chosen={chosenCurrency} info={currencyArr} cancelIndex={3} funcToSubmit={setchosenCurrency} />
+                <OptionForCurrency />
 
                 <Text style={styles.optionsName}>{security}</Text>
 

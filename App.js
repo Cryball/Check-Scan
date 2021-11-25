@@ -11,24 +11,29 @@ import ChangeEmail from './src/Components/Screens/SettingsScreen/ChangeEmail';
 import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 import AboutDeveloper from './src/Components/Screens/SettingsScreen/AboutDeveloper';
 import ForgotPassword from './src/Components/Screens/AutorizScreen/ForgotPassword';
+import { createStore } from "redux";
+import { Provider } from 'react-redux';
+import { store } from './src/redux/store';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <LanguageContextProvider>
-        <Stack.Navigator>
-          <Stack.Screen options={{ headerShown: false }} name="Login" component={AutorizScreen} />
-          <Stack.Screen options={{ headerShown: false }} name="Home" component={MyTabs} />
-          <Stack.Screen options={{ headerShown: false }} name="CurrentShopBills" component={CurrentShopBillsScreen} />
-          <Stack.Screen options={{ headerShown: false }} name="changePassword" component={ChangePassword} />
-          <Stack.Screen options={{ headerShown: false }} name="changeEmail" component={ChangeEmail} />
-          <Stack.Screen options={{ headerShown: false }} name="aboutDeveloper" component={AboutDeveloper} />
-          <Stack.Screen options={{ headerShown: false }} name="forgotPassword" component={ForgotPassword} />
-        </Stack.Navigator>
-      </LanguageContextProvider>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <LanguageContextProvider>
+          <Stack.Navigator>
+            <Stack.Screen options={{ headerShown: false }} name="Login" component={AutorizScreen} />
+            <Stack.Screen options={{ headerShown: false }} name="Home" component={MyTabs} />
+            <Stack.Screen options={{ headerShown: false }} name="CurrentShopBills" component={CurrentShopBillsScreen} />
+            <Stack.Screen options={{ headerShown: false }} name="changePassword" component={ChangePassword} />
+            <Stack.Screen options={{ headerShown: false }} name="changeEmail" component={ChangeEmail} />
+            <Stack.Screen options={{ headerShown: false }} name="aboutDeveloper" component={AboutDeveloper} />
+            <Stack.Screen options={{ headerShown: false }} name="forgotPassword" component={ForgotPassword} />
+          </Stack.Navigator>
+        </LanguageContextProvider>
+      </NavigationContainer>
+    </Provider>
   );
 }
 

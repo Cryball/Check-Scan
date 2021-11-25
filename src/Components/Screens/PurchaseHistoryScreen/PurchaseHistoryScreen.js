@@ -1,13 +1,18 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useContext } from 'react'
-import { TouchableOpacity, Text, Image, View, TextInput, StyleSheet, FlatList, } from 'react-native'
+import { TouchableOpacity, Text, Image, View, TextInput, StyleSheet, FlatList, Button } from 'react-native'
 import { colors, data } from '../../../../constants'
 import { LanguageContext, useTranslation } from '../../../Localization/Translations';
 import HeaderPurchaseHistory from './HeaderPurchaseHistory';
 import { backgroundPic, chooseColor } from '../../utils/categoryHelper';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useDispatch, useSelector } from "react-redux";
 
 const PurchaseHistoryScreen = () => {
+
+    const currency = useSelector(state => state.currency.currency)
+
+    console.log(currency, "currency")
 
     const navigation = useNavigation()
 
@@ -93,7 +98,7 @@ const PurchaseHistoryScreen = () => {
                                     <View>
                                         <View style={styles.miniHeader}>
                                             <Text style={styles.text}>{item.item.date}</Text>
-                                            <Text style={styles.text}>{total}: {sumFinalPriceCurrCategory(priceCurrCategoryArr)} ₽</Text>
+                                            <Text style={styles.text}>{total}: {sumFinalPriceCurrCategory(priceCurrCategoryArr)} {currency}</Text>
                                         </View>
                                         {item.item.content.map((i, index) => {
                                             //console.log(i.shopCategory, index)
@@ -129,7 +134,7 @@ const PurchaseHistoryScreen = () => {
                                                                 <Text style={styles.shopCategory}>{i.shopCategory}</Text>
                                                             </View>
                                                             <View>
-                                                                <Text style={{ marginLeft: 80, fontWeight: '700', fontSize: 20 }}>{i.finalPrice} ₽</Text>
+                                                                <Text style={{ marginLeft: 80, fontWeight: '700', fontSize: 20 }}>{i.finalPrice} {currency}</Text>
                                                             </View>
                                                         </View>
                                                     </TouchableOpacity>)
@@ -141,7 +146,7 @@ const PurchaseHistoryScreen = () => {
                                     <View>
                                         <View style={styles.miniHeader}>
                                             <Text style={styles.text}>{item.item.date}</Text>
-                                            <Text style={styles.text}>{total}: {sumFinalPrice(item.item.content)} ₽</Text>
+                                            <Text style={styles.text}>{total}: {sumFinalPrice(item.item.content)} {currency}</Text>
                                         </View>
                                         {item.item.content.map((i, index) => {
                                             //console.log(i.shopCategory, index)
@@ -176,7 +181,7 @@ const PurchaseHistoryScreen = () => {
                                                             <Text style={styles.shopCategory}>{i.shopCategory}</Text>
                                                         </View>
                                                         <View>
-                                                            <Text style={{ marginLeft: 80, fontWeight: '700', fontSize: 20 }}>{i.finalPrice} ₽</Text>
+                                                            <Text style={{ marginLeft: 80, fontWeight: '700', fontSize: 20 }}>{i.finalPrice} {currency}</Text>
                                                         </View>
                                                     </View>
                                                 </TouchableOpacity>)

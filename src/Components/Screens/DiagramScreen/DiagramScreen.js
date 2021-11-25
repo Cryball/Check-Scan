@@ -5,10 +5,13 @@ import { VictoryPie } from 'victory-native'
 import { data } from '../../../../constants';
 import DiagramCategory from './DiagramCategory';
 import { useTranslation } from '../../../Localization/Translations';
+import { useSelector } from 'react-redux';
 
 const DiagramScreen = () => {
 
     const { november } = useTranslation()
+
+    const currency = useSelector(state => state.currency.currency)
 
     function sumAllPrice(data) {
         let sum = []
@@ -26,7 +29,7 @@ const DiagramScreen = () => {
             <DiagramHeader />
             <View style={styles.allSum}>
                 <Text style={{ fontWeight: '700', fontSize: 24 }}>{november}</Text>
-                <Text style={{ fontWeight: '700', fontSize: 24 }}>{sumAllPrice(data)} ₽</Text>
+                <Text style={{ fontWeight: '700', fontSize: 24 }}>{sumAllPrice(data)} {currency}</Text>
             </View>
             <FlatList
                 data={[1]}
