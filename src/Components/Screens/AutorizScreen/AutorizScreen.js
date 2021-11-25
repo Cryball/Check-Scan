@@ -6,7 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../../../constants';
 import { useTranslation } from '../../../Localization/Translations';
 
-const AutorizPage = () => {
+const AutorizScreen = () => {
     const { emailText, passwordText, register, signIn, meet } = useTranslation()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -88,7 +88,7 @@ const AutorizPage = () => {
     )
 }
 
-export default AutorizPage
+export default AutorizScreen
 
 const styles = StyleSheet.create({
     container: {

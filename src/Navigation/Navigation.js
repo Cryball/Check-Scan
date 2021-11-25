@@ -1,13 +1,13 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import DiagramPage from '../Components/Pages/DiagramPage/DiagramPage';
-import SettingsPage from '../Components/Pages/SettingsPage/SettingsPage';
-import PurchaseHistory from '../Components/Pages/Purchase history/PurchaseHistory';
-import PhotoPage from '../Components/Pages/PhotoPage/PhotoPage';
+import DiagramScreen from '../Components/Screens/DiagramScreen/DiagramScreen';
+import SettingsScreen from '../Components/Screens/SettingsScreen/SettingsScreen';
+import PurchaseHistoryScreen from '../Components/Screens/PurchaseHistoryScreen/PurchaseHistoryScreen';
+import PhotoScreen from '../Components/Screens/PhotoScreen/PhotoScreen';
 import { colors } from '../../constants';
 import { View, Text, Image, TouchableHighlight } from 'react-native'
 import { useTranslation } from '../Localization/Translations';
-import CurrentShopBills from '../Components/Pages/CurrentShopBills/CurrentShopBills';
+//import CurrentShopBills from '../Components/Pages/CurrentShopBills/CurrentShopBills';
 
 const Tab = createBottomTabNavigator();
 
@@ -39,7 +39,7 @@ const MyTabs = () => {
                 }
             }}
         >
-            <Tab.Screen name="Purchase" component={PurchaseHistory} options={{
+            <Tab.Screen name="Purchase" component={PurchaseHistoryScreen} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: 'center', justifyContent: 'center', }}>
                         <Image
@@ -55,7 +55,7 @@ const MyTabs = () => {
                     </View>
                 ),
             }} />
-            <Tab.Screen name="Photo" component={PhotoPage} options={{
+            <Tab.Screen name="Photo" component={PhotoScreen} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: 'center', justifyContent: 'center', }}>
                         <Image
@@ -71,7 +71,7 @@ const MyTabs = () => {
                     </View>
                 ),
             }} />
-            <Tab.Screen name="Diagram" component={DiagramPage} options={{
+            <Tab.Screen name="Diagram" component={DiagramScreen} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: 'center', justifyContent: 'center', }}>
                         <Image
@@ -87,7 +87,7 @@ const MyTabs = () => {
                     </View>
                 ),
             }} />
-            <Tab.Screen name="Settings" component={SettingsPage} options={{
+            <Tab.Screen name="Settings" component={SettingsScreen} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: 'center', justifyContent: 'center', }}>
                         <Image

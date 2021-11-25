@@ -8,7 +8,7 @@ import CurrentShopBillsHeader from './CurrentShopBillsHeader';
 import { backgroundPic, chooseColor } from '../../utils/categoryHelper';
 import { useTranslation } from '../../../Localization/Translations';
 
-const CurrentShopBills = ({ route }) => {
+const CurrentShopBillsScreen = ({ route }) => {
     const { receipt, viewScan, amount, price, productName } = useTranslation()
     const navigation = useNavigation()
     const { shop, shopCategory, finalPrice, products } = route.params
@@ -98,4 +98,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default CurrentShopBills
+export default CurrentShopBillsScreen

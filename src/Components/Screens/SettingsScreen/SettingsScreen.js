@@ -9,7 +9,7 @@ import Options from './Options'
 import * as firebase from 'firebase';
 import changePassword from './ChangePassword'
 
-const SettingsPage = () => {
+const SettingsScreen = () => {
     const { lang, signOut, cancel, app, security, changeP, changeE, theme, currency } = useTranslation()
 
     const [chosenTheme, setchosenTheme] = useState('Default')
@@ -157,4 +157,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default SettingsPage
+export default SettingsScreen

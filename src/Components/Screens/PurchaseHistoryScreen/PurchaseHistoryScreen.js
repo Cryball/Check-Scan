@@ -7,7 +7,7 @@ import HeaderPurchaseHistory from './HeaderPurchaseHistory';
 import { backgroundPic, chooseColor } from '../../utils/categoryHelper';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const PurchaseHistory = () => {
+const PurchaseHistoryScreen = () => {
 
     const navigation = useNavigation()
 
@@ -275,4 +275,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PurchaseHistory
+export default PurchaseHistoryScreen

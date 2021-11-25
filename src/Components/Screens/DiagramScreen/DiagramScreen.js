@@ -6,7 +6,7 @@ import { data } from '../../../../constants';
 import DiagramCategory from './DiagramCategory';
 import { useTranslation } from '../../../Localization/Translations';
 
-const DiagramPage = () => {
+const DiagramScreen = () => {
 
     const { november } = useTranslation()
 
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default DiagramPage
+export default DiagramScreen
