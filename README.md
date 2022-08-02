@@ -19,6 +19,8 @@ this allows the user to get more detailed information about purchases and costs.
 For example, when scanning a check from a grocery store, all your purchases will be categorized:
 dairy products, meat products, groceries, pet products, and so on.
 
+:warning: Computer vision part is stopped indefinitely.
+
 ___
 
 ## :tv: **Demo**:
@@ -55,4 +57,3 @@ Start app by:
 ```shell
 npm install
 ```
-:warning: If you start project localy, you can connect your MetaMask account, check your balance, but you can't buy nft's, because private keys from pinata cloud are not in github.
